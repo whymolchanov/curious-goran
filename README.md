@@ -26,7 +26,7 @@
 #### CSV template
 
 5. Check `data` folder and find `csv-template.example.json` file.
-6. Add your own statuses to the csv in the order you would like.
+6. Add your own statuses to the csv in the order you would like. **key is required column!**
 7. Rename `csv-template.example.json` to `csv-template.json`
 
 ---

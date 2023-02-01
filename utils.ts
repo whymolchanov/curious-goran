@@ -75,6 +75,12 @@ export const buildCsv = (
 ): Csv => {
   const result: CsvPresentation = [];
 
+  if (csvTemplate[0] !== "key") {
+    throw new Error(
+      'First column in CSV teamplate has to be "key"! Please add it to the CSV template as a first item'
+    );
+  }
+
   result.push(csvTemplate.join(", "));
 
   timedStatuses.forEach(({ key, statuses }, index) => {
