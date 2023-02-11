@@ -1,3 +1,5 @@
+import { DateTime, Duration } from "luxon";
+import { Config } from "./config";
 import {
   Csv,
   CsvPresentation,
@@ -36,6 +38,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 };
 
 export const calculateHowMuchTimeWasInEveryStatus = (
+  config: Config,
   source: Transition
 ): StatusesDurations => {
   const { transitions } = source;
@@ -49,10 +52,11 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 
   const arrayOfDurations = slicedPairs.map((pair) => {
     const [first, second] = pair;
-    const delta = Date.parse(second.when) - Date.parse(first.when);
-    const days = delta / (24 * 60 * 60 * 1000);
+    const firstDate = DateTime.fromISO(first.when);
+    const secondDate = DateTime.fromISO(second.when);
+    const delta: Duration = secondDate.diff(firstDate, [config.timeUnit]);
 
-    return { [second.fromStatus]: Math.round(days) };
+    return { [second.fromStatus]: Math.round(delta.values[config.timeUnit]) };
   });
 
   return arrayOfDurations.reduce((acc, item) => {
