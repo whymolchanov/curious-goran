@@ -7,6 +7,7 @@ import {
   calculateHowMuchTimeWasInEveryStatus,
   withoutNull,
 } from "./utils";
+import { config } from "./config";
 
 const makeTransitionsFromChangelogHistory = (history: History) => {
   const { created, items } = history;
@@ -42,7 +43,7 @@ const createTimedStatuses = (data: Issue[]) => {
   return makeTransitions(data).map((item) => {
     return {
       key: item.key,
-      statuses: calculateHowMuchTimeWasInEveryStatus(item),
+      statuses: calculateHowMuchTimeWasInEveryStatus(config, item),
     };
   }) as TimedStatus[];
 };
