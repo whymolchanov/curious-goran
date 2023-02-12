@@ -37,7 +37,6 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
     calculateHowMuchTimeWasInEveryStatus(
       {
         timeUnit: "days",
-        setZeroInsteadOfNull: true,
       },
       {
         key: "RET-2922",
@@ -99,7 +98,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
 test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
   assert.equal(
     calculateHowMuchTimeWasInEveryStatus(
-      { timeUnit: "hours", setZeroInsteadOfNull: true },
+      { timeUnit: "hours" },
       {
         key: "RET-2768",
         transitions: [
@@ -141,10 +140,20 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
           {
             when: "2022-11-07T16:23:44.164+0300",
             fromStatus: "Ready to release",
+            toStatus: "Tested",
+          },
+          {
+            when: "2022-11-07T19:57:25.164+0300",
+            fromStatus: "Tested",
+            toStatus: "Ready to release",
+          },
+          {
+            when: "2022-11-07T20:23:44.164+0300",
+            fromStatus: "Ready to release",
             toStatus: "Done",
           },
           {
-            when: "2022-11-07T16:24:50.948+0300",
+            when: "2022-11-08T16:24:50.948+0300",
             fromStatus: "Done",
             toStatus: "Done",
           },
@@ -157,7 +166,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
       "In Review": 34,
       "Ready for Testing": 26,
       "In Testing": 58,
-      Tested: 1,
+      Tested: 4,
       "Ready to release": 38,
     }
   );

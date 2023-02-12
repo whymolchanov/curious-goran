@@ -38,7 +38,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 };
 
 export const calculateHowMuchTimeWasInEveryStatus = (
-  config: Config,
+  config: Pick<Config, "timeUnit">,
   source: Transition
 ): StatusesDurations => {
   const { transitions } = source;
@@ -76,7 +76,7 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 export const buildCsv = (
   timedStatuses: TimedStatus[],
   csvTemplate: CsvTemplate,
-  config: { setZeroInsteadOfNull: boolean }
+  config: Pick<Config, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
 
