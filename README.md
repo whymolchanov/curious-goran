@@ -46,6 +46,3 @@
 
 4. Run `npm run csv`
 5. Script will get data from `./data/source.json` (where the Jira response is placed), convert it to CSV with proper structure and put the result to the `./data/result.csv` file.
-
-Write about config. Hours based.
-nulls should be 0s
