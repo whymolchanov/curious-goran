@@ -18,7 +18,7 @@ const AXIOS_INSTANCE = axios.create({
 });
 
 const getFilterUrl = async () => {
-  const filterId = process.argv.slice(2);
+  const [filterId] = process.argv.slice(2);
 
   if (!filterId) {
     throw new Error(
