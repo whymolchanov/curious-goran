@@ -1,6 +1,5 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-import { Config } from "../config";
 import {
   buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
@@ -38,6 +37,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
     calculateHowMuchTimeWasInEveryStatus(
       {
         timeUnit: "days",
+        setZeroInsteadOfNull: true,
       },
       {
         key: "RET-2922",
@@ -99,7 +99,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
 test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
   assert.equal(
     calculateHowMuchTimeWasInEveryStatus(
-      { timeUnit: "hours" },
+      { timeUnit: "hours", setZeroInsteadOfNull: true },
       {
         key: "RET-2768",
         transitions: [
