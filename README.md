@@ -11,9 +11,9 @@
 
 ## Setup
 
-[_read more here_](https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/#supply-basic-auth-headers)
-
 #### Authentication
+
+[_read more here_](https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/#supply-basic-auth-headers)
 
 1. Create a token https://id.atlassian.com/manage-profile/security/api-tokens
 2. Encode it `echo -n user@example.com:api_token_string | base64`
@@ -29,6 +29,10 @@
 6. Add your own statuses to the csv in the order you would like. **key is required column!**
 7. Rename `csv-template.example.json` to `csv-template.json`
 
+#### Config (optional)
+
+8. Check `config.ts` file. There you will find the configuration for Curious Goran. If you need it, change fields in a way you like it.
+
 ---
 
 ## Request data by filter
@@ -42,3 +46,6 @@
 
 4. Run `npm run csv`
 5. Script will get data from `./data/source.json` (where the Jira response is placed), convert it to CSV with proper structure and put the result to the `./data/result.csv` file.
+
+Write about config. Hours based.
+nulls should be 0s
