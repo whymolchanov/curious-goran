@@ -53,7 +53,7 @@ console.log("Start converting Jira issues to CSV...");
 const timedStatuses = createTimedStatuses(issues);
 
 const csvTemplate = require("./data/csv-template.json") as CsvTemplate;
-const csv = buildCsv(timedStatuses, csvTemplate);
+const csv = buildCsv(timedStatuses, csvTemplate, config);
 
 console.log("Writting to the result.csv file...");
 

@@ -171,7 +171,6 @@ test("buildCsv", () => {
         {
           key: "RET-2922",
           statuses: {
-            "Waiting for Development": 0,
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
@@ -180,7 +179,29 @@ test("buildCsv", () => {
           },
         },
       ],
-      csvTemplate
+      csvTemplate,
+      { setZeroInsteadOfNull: false }
+    ),
+    [csvTemplate.join(", "), "RET-2922, , 0"].join("\n")
+  );
+});
+test("buildCsv", () => {
+  assert.equal(
+    buildCsv(
+      [
+        {
+          key: "RET-2922",
+          statuses: {
+            "In progress": 0,
+            "In Review": 0,
+            "Ready for Testing": 0,
+            "In Testing": 0,
+            "Ready to release": 6,
+          },
+        },
+      ],
+      csvTemplate,
+      { setZeroInsteadOfNull: true }
     ),
     [csvTemplate.join(", "), "RET-2922, 0, 0"].join("\n")
   );

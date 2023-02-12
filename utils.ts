@@ -75,7 +75,8 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 
 export const buildCsv = (
   timedStatuses: TimedStatus[],
-  csvTemplate: CsvTemplate
+  csvTemplate: CsvTemplate,
+  config: { setZeroInsteadOfNull: boolean }
 ): Csv => {
   const result: CsvPresentation = [];
 
@@ -87,13 +88,13 @@ export const buildCsv = (
 
   result.push(csvTemplate.join(", "));
 
-  timedStatuses.forEach(({ key, statuses }, index) => {
+  timedStatuses.forEach(({ key, statuses }) => {
     const csvRow: (string | number | null)[] = csvTemplate.map((item) => {
       if (statuses[item] !== undefined) {
         return statuses[item];
       }
 
-      return null;
+      return config.setZeroInsteadOfNull ? 0 : null;
     });
     csvRow[0] = key;
 
