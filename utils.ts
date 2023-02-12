@@ -1,3 +1,5 @@
+import { DateTime, Duration } from "luxon";
+import { Config } from "./config";
 import {
   Csv,
   CsvPresentation,
@@ -36,6 +38,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 };
 
 export const calculateHowMuchTimeWasInEveryStatus = (
+  config: Pick<Config, "timeUnit">,
   source: Transition
 ): StatusesDurations => {
   const { transitions } = source;
@@ -49,10 +52,11 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 
   const arrayOfDurations = slicedPairs.map((pair) => {
     const [first, second] = pair;
-    const delta = Date.parse(second.when) - Date.parse(first.when);
-    const days = delta / (24 * 60 * 60 * 1000);
+    const firstDate = DateTime.fromISO(first.when);
+    const secondDate = DateTime.fromISO(second.when);
+    const delta: Duration = secondDate.diff(firstDate, [config.timeUnit]);
 
-    return { [second.fromStatus]: Math.round(days) };
+    return { [second.fromStatus]: Math.floor(delta.get(config.timeUnit)) };
   });
 
   return arrayOfDurations.reduce((acc, item) => {
@@ -71,7 +75,8 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 
 export const buildCsv = (
   timedStatuses: TimedStatus[],
-  csvTemplate: CsvTemplate
+  csvTemplate: CsvTemplate,
+  config: Pick<Config, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
 
@@ -83,13 +88,13 @@ export const buildCsv = (
 
   result.push(csvTemplate.join(", "));
 
-  timedStatuses.forEach(({ key, statuses }, index) => {
+  timedStatuses.forEach(({ key, statuses }) => {
     const csvRow: (string | number | null)[] = csvTemplate.map((item) => {
       if (statuses[item] !== undefined) {
         return statuses[item];
       }
 
-      return null;
+      return config.setZeroInsteadOfNull ? 0 : null;
     });
     csvRow[0] = key;
 

@@ -11,14 +11,14 @@ const STREAM = createWriteStream("./data/source.json");
 
 const AXIOS_INSTANCE = axios.create({
   baseURL: process.env.JIRA_BASE_URL + "rest/api/2/",
-  timeout: 10000,
+  timeout: 15000,
   headers: {
     Authorization: `Basic ${process.env.JIRA_TOKEN_BASE_64}`,
   },
 });
 
 const getFilterUrl = async () => {
-  const filterId = process.argv.slice(2);
+  const [filterId] = process.argv.slice(2);
 
   if (!filterId) {
     throw new Error(

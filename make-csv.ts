@@ -7,6 +7,7 @@ import {
   calculateHowMuchTimeWasInEveryStatus,
   withoutNull,
 } from "./utils";
+import { config } from "./config";
 
 const makeTransitionsFromChangelogHistory = (history: History) => {
   const { created, items } = history;
@@ -42,7 +43,7 @@ const createTimedStatuses = (data: Issue[]) => {
   return makeTransitions(data).map((item) => {
     return {
       key: item.key,
-      statuses: calculateHowMuchTimeWasInEveryStatus(item),
+      statuses: calculateHowMuchTimeWasInEveryStatus(config, item),
     };
   }) as TimedStatus[];
 };
@@ -52,7 +53,7 @@ console.log("Start converting Jira issues to CSV...");
 const timedStatuses = createTimedStatuses(issues);
 
 const csvTemplate = require("./data/csv-template.json") as CsvTemplate;
-const csv = buildCsv(timedStatuses, csvTemplate);
+const csv = buildCsv(timedStatuses, csvTemplate, config);
 
 console.log("Writting to the result.csv file...");
 

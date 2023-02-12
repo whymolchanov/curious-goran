@@ -11,9 +11,9 @@
 
 ## Setup
 
-[_read more here_](https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/#supply-basic-auth-headers)
-
 #### Authentication
+
+[_read more here_](https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/#supply-basic-auth-headers)
 
 1. Create a token https://id.atlassian.com/manage-profile/security/api-tokens
 2. Encode it `echo -n user@example.com:api_token_string | base64`
@@ -28,6 +28,10 @@
 5. Check `data` folder and find `csv-template.example.json` file.
 6. Add your own statuses to the csv in the order you would like. **key is required column!**
 7. Rename `csv-template.example.json` to `csv-template.json`
+
+#### Config (optional)
+
+8. Check `config.ts` file. There you will find the configuration for Curious Goran. If you need it, change fields in a way you like it.
 
 ---
 
