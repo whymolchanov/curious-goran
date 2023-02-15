@@ -1,7 +1,7 @@
 # Curious Goran
 
 - Request data from Jira based on particular filter ID
-- Create a CSV file with time statistics (in days) on every ticket
+- Create a CSV file with time statistics (in days or hours) on every ticket
 
 #### Maybe in the future
 
