@@ -4,3 +4,4 @@ data/**
 !data/csv-template.example.json
 .vscode
 .DS_Store
+coverage

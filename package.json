@@ -7,6 +7,7 @@
     "get": "ts-node get.ts",
     "csv": "ts-node make-csv.ts",
     "test": "uvu -r tsm tests",
+    "coverage": "c8 npm run test",
     "files-test": "ts-node tester.ts"
   },
   "keywords": [],
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@types/luxon": "3.2.0",
     "@types/node": "18.11.18",
+    "c8": "7.13.0",
     "tsm": "2.3.0",
     "uvu": "0.5.6"
   },

@@ -173,7 +173,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
 });
 
 const csvTemplate = ["key", "Waiting for Development", "In Testing"];
-test("buildCsv", () => {
+test("buildCsv with empty spaces", () => {
   assert.equal(
     buildCsv(
       [
@@ -194,7 +194,8 @@ test("buildCsv", () => {
     [csvTemplate.join(", "), "RET-2922, , 0"].join("\n")
   );
 });
-test("buildCsv", () => {
+
+test("buildCsv with zeros", () => {
   assert.equal(
     buildCsv(
       [
@@ -214,6 +215,28 @@ test("buildCsv", () => {
     ),
     [csvTemplate.join(", "), "RET-2922, 0, 0"].join("\n")
   );
+});
+
+const csvTemplateWithoutKey = ["Waiting for Development", "In Testing"];
+test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
+  assert.throws(() => {
+    buildCsv(
+      [
+        {
+          key: "RET-2922",
+          statuses: {
+            "In progress": 0,
+            "In Review": 0,
+            "Ready for Testing": 0,
+            "In Testing": 0,
+            "Ready to release": 6,
+          },
+        },
+      ],
+      csvTemplateWithoutKey,
+      { setZeroInsteadOfNull: true }
+    );
+  });
 });
 
 test.run();
