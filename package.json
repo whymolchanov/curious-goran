@@ -4,7 +4,6 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "all": "npm run get && npm run timed-statuses && npm run csv",
     "get": "ts-node get.ts",
     "timed-statuses": "ts-node make-timed-statuses.ts",
     "csv": "ts-node make-csv.ts",
