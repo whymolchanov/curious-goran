@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "get": "ts-node get.ts",
-    "timed-statuses": "ts-node make-timed-statuses.ts",
+    "convert-jira-tickets-to-tickets": "ts-node convert.ts",
     "csv": "ts-node make-csv.ts",
     "test": "uvu -r tsm tests",
     "coverage": "c8 npm run test",

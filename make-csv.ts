@@ -1,7 +1,6 @@
-const issues = require("./data/source.json");
 import { createWriteStream } from "fs";
 import { exit } from "process";
-import { History, Transition, TimedStatus, CsvTemplate, Issue } from "./types";
+import { JiraTicketHistory, Transition, TimedStatus, CsvTemplate, JiraTicket } from "./types";
 import {
   buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
@@ -9,7 +8,7 @@ import {
 } from "./utils";
 import { config } from "./config";
 
-const makeTransitionsFromChangelogHistory = (history: History) => {
+const makeTransitionsFromChangelogHistory = (history: JiraTicketHistory) => {
   const { created, items } = history;
 
   const onlyStatusItems = items.filter(({ field }) => field === "status");
@@ -27,7 +26,7 @@ const makeTransitionsFromChangelogHistory = (history: History) => {
   return { when: created, fromStatus: fromString, toStatus: toString };
 };
 
-export const makeTransitions = (issues: Issue[]): Transition[] => {
+export const makeTransitions = (issues: JiraTicket[]): Transition[] => {
   return issues.map(({ key, changelog }) => {
     const transitions = changelog.histories
       .map((history) => {
@@ -39,7 +38,7 @@ export const makeTransitions = (issues: Issue[]): Transition[] => {
   });
 };
 
-const createTimedStatuses = (data: Issue[]) => {
+const createTimedStatuses = (data: JiraTicket[]) => {
   return makeTransitions(data).map((item) => {
     return {
       key: item.key,
@@ -50,9 +49,9 @@ const createTimedStatuses = (data: Issue[]) => {
 
 console.log("Start converting Jira issues to CSV...");
 
-const timedStatuses = require("./data/timed-statuses.json") as TimedStatus[];
+const tickets = require("./data/tickets.json") as TimedStatus[];
 const csvTemplate = require("./data/csv-template.json") as CsvTemplate;
-const csv = buildCsv(timedStatuses, csvTemplate, config);
+const csv = buildCsv(tickets, csvTemplate, config);
 
 console.log("Writting to the result.csv file...");
 

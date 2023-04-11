@@ -1,14 +1,14 @@
 const issues = require("./data/source.json");
 import { createWriteStream } from "fs";
 import { exit } from "process";
-import { History, Transition, TimedStatus, Issue } from "./types";
+import { JiraTicketHistory, Transition, TimedStatus, JiraTicket } from "./types";
 import {
     calculateHowMuchTimeWasInEveryStatus,
     withoutNull,
 } from "./utils";
 import { config } from "./config";
 
-const makeTransitionsFromChangelogHistory = (history: History) => {
+const makeTransitionsFromChangelogHistory = (history: JiraTicketHistory) => {
     const { created, items } = history;
 
     const onlyStatusItems = items.filter(({ field }) => field === "status");
@@ -26,7 +26,7 @@ const makeTransitionsFromChangelogHistory = (history: History) => {
     return { when: created, fromStatus: fromString, toStatus: toString };
 };
 
-export const makeTransitions = (issues: Issue[]): Transition[] => {
+export const makeTransitions = (issues: JiraTicket[]): Transition[] => {
     return issues.map(({ key, changelog }) => {
         const transitions = changelog.histories
             .map((history) => {
@@ -38,7 +38,7 @@ export const makeTransitions = (issues: Issue[]): Transition[] => {
     });
 };
 
-const createTimedStatuses = (data: Issue[]) => {
+const createTimedStatuses = (data: JiraTicket[]) => {
     return makeTransitions(data).map((item) => {
         return {
             key: item.key,
@@ -49,7 +49,7 @@ const createTimedStatuses = (data: Issue[]) => {
 
 const timedStatuses = createTimedStatuses(issues);
 
-const STREAM_PATH = "./data/timed-statuses.json";
+const STREAM_PATH = "./data/tickets.json";
 const STREAM = createWriteStream(STREAM_PATH);
 STREAM.write(JSON.stringify(timedStatuses), () => {
     console.log("Done!");
