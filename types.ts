@@ -4,8 +4,11 @@ export type CsvPresentation = CsvRow[];
 
 export type CsvRow = string;
 
+export type JiraTicketStatus = string;
+
 export interface CsvBuildConfig {
-  interestedStatusesForTimeCalculations: string[];
+  interestedStatusesForTimeCalculations: JiraTicketStatus[];
+  switchesBetweenStatuses: { from: JiraTicketStatus; to: JiraTicketStatus }[]
 };
 
 export interface Ticket {
@@ -13,19 +16,20 @@ export interface Ticket {
   statuses: TimeInStatus;
 }
 
-export type TimeInStatus = Record<string, number>;
+export type TimeInStatus = Record<JiraTicketStatus, number>;
 
 export interface Transition {
   key: string;
   transitions: {
     when: string;
-    fromStatus: string;
-    toStatus: string;
+    fromStatus: JiraTicketStatus;
+    toStatus: JiraTicketStatus;
   }[];
 }
 
 interface JiraTicketHistoryItem {
   field: string;
+  // TODO(improvement): maybe this is JiraTicketStatus as well?
   fromString: string;
   toString: string;
 }

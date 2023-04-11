@@ -174,7 +174,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
   );
 });
 
-const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["key", "Waiting for Development", "In Testing"] };
+const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["key", "Waiting for Development", "In Testing"], switchesBetweenStatuses: [] };
 test("buildCsv with empty spaces", () => {
   assert.equal(
     buildCsv(
@@ -219,7 +219,7 @@ test("buildCsv with zeros", () => {
   );
 });
 
-const csvBuildConfig2: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"] };
+const csvBuildConfig2: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"], "switchesBetweenStatuses": [] };
 test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
   assert.throws(() => {
     buildCsv(
