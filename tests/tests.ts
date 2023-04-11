@@ -90,7 +90,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
       "In Review": 0,
       "Ready for Testing": 0,
       "In Testing": 0,
-      "Ready to release": 5,
+      "Ready to release": 6,
     }
   );
 });
@@ -161,12 +161,12 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
       }
     ),
     {
-      "Selected for Development": 0,
-      "In progress": 82,
-      "In Review": 34,
+      "Selected for Development": 1,
+      "In progress": 83,
+      "In Review": 35,
       "Ready for Testing": 26,
-      "In Testing": 58,
-      Tested: 4,
+      "In Testing": 59,
+      Tested: 6,
       "Ready to release": 38,
     }
   );
