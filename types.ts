@@ -4,14 +4,14 @@ export type CsvPresentation = CsvRow[];
 
 export type CsvRow = string;
 
-export type CsvTemplate = string[];
+export type CsvBuildConfig = string[];
 
-export interface TimedStatus {
+export interface Ticket {
   key: string;
-  statuses: StatusesDurations;
+  statuses: TimeInStatus;
 }
 
-export type StatusesDurations = Record<string, number>;
+export type TimeInStatus = Record<string, number>;
 
 export interface Transition {
   key: string;

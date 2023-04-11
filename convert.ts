@@ -1,7 +1,7 @@
 const issues = require("./data/source.json");
 import { createWriteStream } from "fs";
 import { exit } from "process";
-import { JiraTicketHistory, Transition, TimedStatus, JiraTicket } from "./types";
+import { JiraTicketHistory, Transition, Ticket, JiraTicket } from "./types";
 import {
     calculateHowMuchTimeWasInEveryStatus,
     withoutNull,
@@ -44,7 +44,7 @@ const createTimedStatuses = (data: JiraTicket[]) => {
             key: item.key,
             statuses: calculateHowMuchTimeWasInEveryStatus(config, item),
         };
-    }) as TimedStatus[];
+    }) as Ticket[];
 };
 
 const timedStatuses = createTimedStatuses(issues);

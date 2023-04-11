@@ -4,9 +4,9 @@ import {
   Csv,
   CsvPresentation,
   CsvRow,
-  CsvTemplate,
-  StatusesDurations,
-  TimedStatus,
+  CsvBuildConfig,
+  TimeInStatus,
+  Ticket,
   Transition,
 } from "./types";
 
@@ -40,7 +40,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 export const calculateHowMuchTimeWasInEveryStatus = (
   config: Pick<Config, "timeUnit">,
   source: Transition
-): StatusesDurations => {
+): TimeInStatus => {
   const { transitions } = source;
   const transitionsWithoutSameStatuses = transitions.filter(
     (transition) => transition.fromStatus !== transition.toStatus
@@ -74,8 +74,8 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 };
 
 export const buildCsv = (
-  timedStatuses: TimedStatus[],
-  csvTemplate: CsvTemplate,
+  tickets: Ticket[],
+  csvTemplate: CsvBuildConfig,
   config: Pick<Config, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
@@ -88,7 +88,7 @@ export const buildCsv = (
 
   result.push(csvTemplate.join(", "));
 
-  timedStatuses.forEach(({ key, statuses }) => {
+  tickets.forEach(({ key, statuses }) => {
     const csvRow: (string | number | null)[] = csvTemplate.map((item) => {
       if (statuses[item] !== undefined) {
         return statuses[item];
