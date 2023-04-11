@@ -1,7 +1,7 @@
-const issues = require("./data/source.json");
+const issues = require("./data/source.json") as JiraTicket[];
 import { createWriteStream } from "fs";
 import { exit } from "process";
-import { JiraTicketHistory, Transition, Ticket, JiraTicket } from "./types";
+import { JiraTicketHistory, Transition, Ticket, JiraTicket, StatusSwitches, StatusSwitchString } from "./types";
 import {
     calculateHowMuchTimeWasInEveryStatus,
     withoutNull,
@@ -38,20 +38,37 @@ export const makeTransitions = (issues: JiraTicket[]): Transition[] => {
     });
 };
 
-const createTimedStatuses = (data: JiraTicket[]) => {
+const calculateSwitches = (item: Transition): StatusSwitches => {
+    const { transitions } = item;
+
+    return transitions.reduce((acc: StatusSwitches, transition) => {
+        const statusSwitchString: StatusSwitchString = [transition.fromStatus, transition.toStatus].join(' -> ');
+
+        if (!acc[statusSwitchString]) {
+            acc[statusSwitchString] = 0;
+        }
+
+        acc[statusSwitchString] = acc[statusSwitchString] + 1;
+
+        return acc;
+    }, {})
+}
+
+export const createTickets = (data: JiraTicket[]): Ticket[] => {
     return makeTransitions(data).map((item) => {
         return {
             key: item.key,
-            statuses: calculateHowMuchTimeWasInEveryStatus(config, item),
+            timeInStatuses: calculateHowMuchTimeWasInEveryStatus(config, item),
+            switchesBetweenStatuses: calculateSwitches(item),
         };
-    }) as Ticket[];
+    });
 };
 
-const timedStatuses = createTimedStatuses(issues);
+const tickets = createTickets(issues);
 
 const STREAM_PATH = "./data/tickets.json";
 const STREAM = createWriteStream(STREAM_PATH);
-STREAM.write(JSON.stringify(timedStatuses), () => {
+STREAM.write(JSON.stringify(tickets), () => {
     console.log("Done!");
     exit(0);
 });

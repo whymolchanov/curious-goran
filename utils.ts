@@ -91,10 +91,10 @@ export const buildCsv = (
 
   result.push(interestedStatusesForTimeCalculations.join(", "));
 
-  tickets.forEach(({ key, statuses }) => {
+  tickets.forEach(({ key, timeInStatuses }) => {
     const csvRow: (string | number | null)[] = interestedStatusesForTimeCalculations.map((item) => {
-      if (statuses[item] !== undefined) {
-        return statuses[item];
+      if (timeInStatuses[item] !== undefined) {
+        return timeInStatuses[item];
       }
 
       return config.setZeroInsteadOfNull ? 0 : null;

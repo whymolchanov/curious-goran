@@ -1,0 +1,772 @@
+[
+    {
+        "expand": "operations,versionedRepresentations,editmeta,customfield_10080.properties,changelog,customfield_10010.requestTypePractice,renderedFields",
+        "id": "56229",
+        "self": "https://impress-global.atlassian.net/rest/api/2/issue/56229",
+        "key": "RET-3072",
+        "changelog": {
+            "startAt": 0,
+            "maxResults": 16,
+            "total": 16,
+            "histories": [
+                {
+                    "id": "352957",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-04-06T02:01:45.769+0300",
+                    "items": [
+                        {
+                            "field": "resolution",
+                            "fieldtype": "jira",
+                            "fieldId": "resolution",
+                            "from": null,
+                            "fromString": null,
+                            "to": "10000",
+                            "toString": "Done"
+                        },
+                        {
+                            "field": "status",
+                            "fieldtype": "jira",
+                            "fieldId": "status",
+                            "from": "10315",
+                            "fromString": "Ready to release",
+                            "to": "10001",
+                            "toString": "Done"
+                        }
+                    ]
+                },
+                {
+                    "id": "346957",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T14:39:49.736+0300",
+                    "items": [
+                        {
+                            "field": "description",
+                            "fieldtype": "jira",
+                            "fieldId": "description",
+                            "from": null,
+                            "fromString": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}} \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. DoD\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465,alt=\"Creating a new minor release via GitHub actions\"!",
+                            "to": null,
+                            "toString": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}}  But the result was “green”. I think it is wrong, the job should fall with exception. \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. DoD\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465!"
+                        }
+                    ]
+                },
+                {
+                    "id": "346860",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T13:12:24.727+0300",
+                    "items": [
+                        {
+                            "field": "status",
+                            "fieldtype": "jira",
+                            "fieldId": "status",
+                            "from": "10054",
+                            "fromString": "Tested",
+                            "to": "10315",
+                            "toString": "Ready to release"
+                        }
+                    ]
+                },
+                {
+                    "id": "346858",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T13:07:59.564+0300",
+                    "items": [
+                        {
+                            "field": "status",
+                            "fieldtype": "jira",
+                            "fieldId": "status",
+                            "from": "10059",
+                            "fromString": "In Review",
+                            "to": "10054",
+                            "toString": "Tested"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346857",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T13:07:21.946+0300",
+                    "items": [
+                        {
+                            "field": "status",
+                            "fieldtype": "jira",
+                            "fieldId": "status",
+                            "from": "3",
+                            "fromString": "In progress",
+                            "to": "10059",
+                            "toString": "In Review"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346850",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:59:13.353+0300",
+                    "items": [
+                        {
+                            "field": "status",
+                            "fieldtype": "jira",
+                            "fieldId": "status",
+                            "from": "10000",
+                            "fromString": "To Do",
+                            "to": "3",
+                            "toString": "In progress"
+                        }
+                    ]
+                },
+                {
+                    "id": "346849",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:59:08.121+0300",
+                    "items": [
+                        {
+                            "field": "assignee",
+                            "fieldtype": "jira",
+                            "fieldId": "assignee",
+                            "from": null,
+                            "fromString": null,
+                            "to": "5eefba7e15483a0ab8f9bee1",
+                            "toString": "Yuri Molchanov",
+                            "tmpFromAccountId": null,
+                            "tmpToAccountId": "5eefba7e15483a0ab8f9bee1"
+                        }
+                    ]
+                },
+                {
+                    "id": "346846",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:39:10.725+0300",
+                    "items": [
+                        {
+                            "field": "labels",
+                            "fieldtype": "jira",
+                            "fieldId": "labels",
+                            "from": null,
+                            "fromString": "Treatment-monitoring",
+                            "to": null,
+                            "toString": "Treatment-monitoring chore"
+                        }
+                    ]
+                },
+                {
+                    "id": "346845",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:38:58.204+0300",
+                    "items": [
+                        {
+                            "field": "description",
+                            "fieldtype": "jira",
+                            "fieldId": "description",
+                            "from": null,
+                            "fromString": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}} \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. Result\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465,alt=\"Creating a new minor release via GitHub actions\"!",
+                            "to": null,
+                            "toString": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}} \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. DoD\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465,alt=\"Creating a new minor release via GitHub actions\"!"
+                        }
+                    ]
+                },
+                {
+                    "id": "346844",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:38:48.469+0300",
+                    "items": [
+                        {
+                            "field": "description",
+                            "fieldtype": "jira",
+                            "fieldId": "description",
+                            "from": null,
+                            "fromString": null,
+                            "to": null,
+                            "toString": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}} \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. Result\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465,alt=\"Creating a new minor release via GitHub actions\"!"
+                        }
+                    ]
+                },
+                {
+                    "id": "346836",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T12:24:43.858+0300",
+                    "items": [
+                        {
+                            "field": "summary",
+                            "fieldtype": "jira",
+                            "fieldId": "summary",
+                            "from": null,
+                            "fromString": "w==pca Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+                            "to": null,
+                            "toString": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346835",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T12:24:42.234+0300",
+                    "items": [
+                        {
+                            "field": "Component",
+                            "fieldtype": "jira",
+                            "fieldId": "components",
+                            "from": "10067",
+                            "fromString": "Backend",
+                            "to": null,
+                            "toString": null
+                        },
+                        {
+                            "field": "Component",
+                            "fieldtype": "jira",
+                            "fieldId": "components",
+                            "from": null,
+                            "fromString": null,
+                            "to": "10065",
+                            "toString": "Web"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346834",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                        "accountId": "5eefba7e15483a0ab8f9bee1",
+                        "emailAddress": "yuri.molchanov@smile2impress.com",
+                        "avatarUrls": {
+                            "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                            "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                            "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                            "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                        },
+                        "displayName": "Yuri Molchanov",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "atlassian"
+                    },
+                    "created": "2023-03-23T12:24:39.550+0300",
+                    "items": [
+                        {
+                            "field": "summary",
+                            "fieldtype": "jira",
+                            "fieldId": "summary",
+                            "from": null,
+                            "fromString": "[Backend] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+                            "to": null,
+                            "toString": "w==pca Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release"
+                        }
+                    ]
+                },
+                {
+                    "id": "346833",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T12:24:24.449+0300",
+                    "items": [
+                        {
+                            "field": "summary",
+                            "fieldtype": "jira",
+                            "fieldId": "summary",
+                            "from": null,
+                            "fromString": "b==pca Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+                            "to": null,
+                            "toString": "[Backend] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346832",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T12:24:23.725+0300",
+                    "items": [
+                        {
+                            "field": "labels",
+                            "fieldtype": "jira",
+                            "fieldId": "labels",
+                            "from": null,
+                            "fromString": "",
+                            "to": null,
+                            "toString": "Treatment-monitoring"
+                        }
+                    ],
+                    "historyMetadata": {}
+                },
+                {
+                    "id": "346831",
+                    "author": {
+                        "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=557058%3Af58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+                        "avatarUrls": {
+                            "48x48": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "24x24": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "16x16": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png",
+                            "32x32": "https://secure.gravatar.com/avatar/600529a9c8bfef89daa848e6db28ed2d?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FAJ-0.png"
+                        },
+                        "displayName": "Automation for Jira",
+                        "active": true,
+                        "timeZone": "Europe/Moscow",
+                        "accountType": "app"
+                    },
+                    "created": "2023-03-23T12:24:22.968+0300",
+                    "items": [
+                        {
+                            "field": "Component",
+                            "fieldtype": "jira",
+                            "fieldId": "components",
+                            "from": null,
+                            "fromString": null,
+                            "to": "10067",
+                            "toString": "Backend"
+                        }
+                    ],
+                    "historyMetadata": {}
+                }
+            ]
+        },
+        "fields": {
+            "statuscategorychangedate": "2023-04-06T02:01:45.740+0300",
+            "customfield_10070": null,
+            "customfield_10071": null,
+            "customfield_10072": null,
+            "customfield_10110": [
+                {
+                    "self": "https://impress-global.atlassian.net/rest/api/2/customFieldOption/10147",
+                    "value": "No",
+                    "id": "10147"
+                }
+            ],
+            "fixVersions": [],
+            "customfield_10111": null,
+            "resolution": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/resolution/10000",
+                "id": "10000",
+                "description": "Work has been completed on this issue.",
+                "name": "Done"
+            },
+            "customfield_10112": null,
+            "customfield_10113": null,
+            "customfield_10114": null,
+            "customfield_10105": null,
+            "customfield_10107": null,
+            "customfield_10108": null,
+            "lastViewed": "2023-04-11T17:11:05.013+0300",
+            "customfield_10060": null,
+            "customfield_10061": null,
+            "customfield_10062": null,
+            "customfield_10063": null,
+            "customfield_10064": null,
+            "customfield_10065": null,
+            "customfield_10066": null,
+            "customfield_10067": null,
+            "priority": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/priority/3",
+                "iconUrl": "https://impress-global.atlassian.net/images/icons/priorities/medium.svg",
+                "name": "Medium",
+                "id": "3"
+            },
+            "customfield_10100": null,
+            "customfield_10101": null,
+            "customfield_10068": null,
+            "customfield_10069": null,
+            "customfield_10102": null,
+            "labels": [
+                "Treatment-monitoring",
+                "chore"
+            ],
+            "aggregatetimeoriginalestimate": null,
+            "timeestimate": null,
+            "versions": [],
+            "issuelinks": [],
+            "assignee": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                "accountId": "5eefba7e15483a0ab8f9bee1",
+                "emailAddress": "yuri.molchanov@smile2impress.com",
+                "avatarUrls": {
+                    "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                    "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                    "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                    "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                },
+                "displayName": "Yuri Molchanov",
+                "active": true,
+                "timeZone": "Europe/Moscow",
+                "accountType": "atlassian"
+            },
+            "status": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/status/10001",
+                "description": "",
+                "iconUrl": "https://impress-global.atlassian.net/",
+                "name": "Done",
+                "id": "10001",
+                "statusCategory": {
+                    "self": "https://impress-global.atlassian.net/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "green",
+                    "name": "Done"
+                }
+            },
+            "components": [
+                {
+                    "self": "https://impress-global.atlassian.net/rest/api/2/component/10065",
+                    "id": "10065",
+                    "name": "Web"
+                }
+            ],
+            "customfield_10051": null,
+            "customfield_10052": null,
+            "customfield_10053": null,
+            "customfield_10054": null,
+            "customfield_10055": null,
+            "customfield_10056": null,
+            "customfield_10057": null,
+            "customfield_10058": null,
+            "customfield_10059": null,
+            "aggregatetimeestimate": null,
+            "creator": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                "accountId": "5eefba7e15483a0ab8f9bee1",
+                "emailAddress": "yuri.molchanov@smile2impress.com",
+                "avatarUrls": {
+                    "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                    "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                    "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                    "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                },
+                "displayName": "Yuri Molchanov",
+                "active": true,
+                "timeZone": "Europe/Moscow",
+                "accountType": "atlassian"
+            },
+            "subtasks": [],
+            "customfield_10040": null,
+            "customfield_10041": null,
+            "reporter": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/user?accountId=5eefba7e15483a0ab8f9bee1",
+                "accountId": "5eefba7e15483a0ab8f9bee1",
+                "emailAddress": "yuri.molchanov@smile2impress.com",
+                "avatarUrls": {
+                    "48x48": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/48",
+                    "24x24": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/24",
+                    "16x16": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/16",
+                    "32x32": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5eefba7e15483a0ab8f9bee1/023e5098-63c0-4219-a08f-0b31d3cb3c3d/32"
+                },
+                "displayName": "Yuri Molchanov",
+                "active": true,
+                "timeZone": "Europe/Moscow",
+                "accountType": "atlassian"
+            },
+            "customfield_10043": null,
+            "customfield_10044": null,
+            "aggregateprogress": {
+                "progress": 0,
+                "total": 0
+            },
+            "customfield_10045": null,
+            "customfield_10046": null,
+            "customfield_10047": null,
+            "customfield_10048": null,
+            "customfield_10038": [],
+            "customfield_10039": null,
+            "progress": {
+                "progress": 0,
+                "total": 0
+            },
+            "votes": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/issue/RET-3072/votes",
+                "votes": 0,
+                "hasVoted": false
+            },
+            "issuetype": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/issuetype/10004",
+                "id": "10004",
+                "description": "A problem or error.",
+                "iconUrl": "https://impress-global.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+                "name": "Bug",
+                "subtask": false,
+                "avatarId": 10303,
+                "hierarchyLevel": 0
+            },
+            "timespent": null,
+            "customfield_10150": null,
+            "customfield_10151": null,
+            "customfield_10030": null,
+            "project": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/project/10054",
+                "id": "10054",
+                "key": "RET",
+                "name": "Treatment",
+                "projectTypeKey": "software",
+                "simplified": false,
+                "avatarUrls": {
+                    "48x48": "https://impress-global.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10573",
+                    "24x24": "https://impress-global.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10573?size=small",
+                    "16x16": "https://impress-global.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10573?size=xsmall",
+                    "32x32": "https://impress-global.atlassian.net/rest/api/2/universal_avatar/view/type/project/avatar/10573?size=medium"
+                }
+            },
+            "customfield_10032": "",
+            "customfield_10033": 0,
+            "aggregatetimespent": null,
+            "customfield_10034": null,
+            "customfield_10035": null,
+            "customfield_10036": null,
+            "customfield_10037": null,
+            "customfield_10029": null,
+            "resolutiondate": "2023-04-06T02:01:45.731+0300",
+            "workratio": -1,
+            "watches": {
+                "self": "https://impress-global.atlassian.net/rest/api/2/issue/RET-3072/watchers",
+                "watchCount": 3,
+                "isWatching": true
+            },
+            "created": "2023-03-23T12:24:20.469+0300",
+            "customfield_10141": null,
+            "customfield_10020": null,
+            "customfield_10142": null,
+            "customfield_10021": null,
+            "customfield_10143": null,
+            "customfield_10022": null,
+            "customfield_10144": null,
+            "customfield_10023": null,
+            "customfield_10024": null,
+            "customfield_10145": null,
+            "customfield_10146": null,
+            "customfield_10025": "10315_*:*_1_*:*_1169361042_*|*_3_*:*_1_*:*_488593_*|*_10000_*:*_1_*:*_2092884_*|*_10054_*:*_1_*:*_265163_*|*_10001_*:*_1_*:*_0_*|*_10059_*:*_1_*:*_37618",
+            "customfield_10147": null,
+            "customfield_10016": null,
+            "customfield_10017": null,
+            "customfield_10018": {
+                "hasEpicLinkFieldDependency": false,
+                "showField": false,
+                "nonEditableReason": {
+                    "reason": "PLUGIN_LICENSE_ERROR",
+                    "message": "The Parent Link is only available to Jira Premium users."
+                }
+            },
+            "customfield_10019": "2|i02wxz:",
+            "updated": "2023-04-06T02:01:45.740+0300",
+            "timeoriginalestimate": null,
+            "description": "h3. Context\n\n[~accountid:61c2e7b1567cb700702332ad] came to me and told me that [this GitHub job|https://github.com/smile2impress/backoffice/actions/runs/4497404638/jobs/7912968854] didn’t create a release. I checked the job and found that there was a message in the logs: {{We have a release branch with the same version as a release in live. Please delete release branch.}}  But the result was “green”. I think it is wrong, the job should fall with exception. \n\nh3. Proposal\n\n[Here|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] in the Treatment Monitoring Release Manager (TMRM) I see that we just {{console.log}} the problem. I think we have to throw an error.\n\nh3. DoD\n\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L26-L32] is true\n*** TMRM throws an error\n* User runs the GitHub action for creating a new minor release (screenshot below)\n** TMRM finds that [this condition|https://github.com/smile2impress/treatment-monitoring-release-manager-action/blob/857988186dbd5b8e55dc1ea3d98223b948f042ff/src/index.ts#L33-L43] is true\n*** TMRM throws an error\n\n\n\nh3. Materials\n\nCreating a new minor release via GitHub actions:\n\n!Screenshot 2023-03-23 at 10.34.02.png|width=1316,height=465!",
+            "customfield_10010": null,
+            "customfield_10099": null,
+            "customfield_10014": null,
+            "customfield_10135": null,
+            "customfield_10015": null,
+            "customfield_10005": null,
+            "customfield_10006": null,
+            "security": null,
+            "customfield_10007": null,
+            "customfield_10008": null,
+            "customfield_10129": null,
+            "customfield_10009": null,
+            "summary": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+            "customfield_10080": null,
+            "customfield_10085": null,
+            "customfield_10086": null,
+            "customfield_10120": [],
+            "customfield_10121": null,
+            "customfield_10000": "{repository={count=5, dataType=repository}, json={\"cachedValue\":{\"errors\":[],\"summary\":{\"repository\":{\"overall\":{\"count\":5,\"lastUpdated\":\"2023-03-29T23:50:39.000+0300\",\"dataType\":\"repository\"},\"byInstanceType\":{\"GitHub\":{\"count\":5,\"name\":\"GitHub\"}}}}},\"isStale\":true}}",
+            "customfield_10122": null,
+            "customfield_10001": null,
+            "customfield_10002": null,
+            "customfield_10003": null,
+            "customfield_10004": null,
+            "customfield_10115": null,
+            "customfield_10116": null,
+            "environment": null,
+            "customfield_10117": null,
+            "customfield_10118": null,
+            "customfield_10119": null,
+            "duedate": null
+        }
+    }
+]

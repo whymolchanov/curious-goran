@@ -11,9 +11,15 @@ export interface CsvBuildConfig {
   switchesBetweenStatuses: { from: JiraTicketStatus; to: JiraTicketStatus }[]
 };
 
+// example: "In review -> In progress"
+export type StatusSwitchString = string;
+export type Count = number;
+export type StatusSwitches = Record<StatusSwitchString, Count>;
+
 export interface Ticket {
   key: string;
-  statuses: TimeInStatus;
+  timeInStatuses: TimeInStatus;
+  switchesBetweenStatuses: StatusSwitches;
 }
 
 export type TimeInStatus = Record<JiraTicketStatus, number>;

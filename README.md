@@ -41,13 +41,18 @@
 2. Script will go through all pages, collect all JiraTickets data and put them to `./data/source.json`
 
 ---
+
 ## Convert JiraTickets to Tickets
 *Ticket is a simplified version of a JiraTicket*
 1. Run `npm run convert-jira-tickets-to-tickets`
 2. Script will convert JiraTickets to Tickets and put them to `tickets.json`
+
 ---
 
 ## Build CSV
+1. Run `npm run csv`
+2. Script will get data from `./data/tickets.json` (where the Tickets is placed)
+3. Filter out necessary data based on `data/csv-build-config.json`
+4. Convert it to CSV with proper structure and put the result to the `./data/result.csv` file.
 
-4. Run `npm run csv`
-5. Script will get data from `./data/tickets.json` (where the Tickets is placed), convert it to CSV with proper structure and put the result to the `./data/result.csv` file.
+<!-- TODO(improve): rewrite README.md -->

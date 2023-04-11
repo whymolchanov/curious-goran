@@ -1,7 +1,8 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
+import { createTickets } from "../convert";
 // TODO(improvement): solve the problem with dots in the paths
-import { CsvBuildConfig } from "../types";
+import { CsvBuildConfig, JiraTicket } from "../types";
 import {
   buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
@@ -181,13 +182,14 @@ test("buildCsv with empty spaces", () => {
       [
         {
           key: "RET-2922",
-          statuses: {
+          timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
             "In Testing": 0,
             "Ready to release": 6,
           },
+          switchesBetweenStatuses: {}
         },
       ],
       csvBuildConfig1,
@@ -203,13 +205,14 @@ test("buildCsv with zeros", () => {
       [
         {
           key: "RET-2922",
-          statuses: {
+          timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
             "In Testing": 0,
             "Ready to release": 6,
           },
+          switchesBetweenStatuses: {}
         },
       ],
       csvBuildConfig1,
@@ -226,13 +229,14 @@ test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
       [
         {
           key: "RET-2922",
-          statuses: {
+          timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
             "In Testing": 0,
             "Ready to release": 6,
           },
+          switchesBetweenStatuses: {}
         },
       ],
       csvBuildConfig2,
@@ -240,5 +244,54 @@ test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
     );
   });
 });
+
+// TODO(improve): this test doesn't pass
+const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
+test("Convert JiraTicket to Ticket", () => {
+  assert.equal(createTickets(jiraTicketsData), [
+    {
+      "key": "RET-3027",
+      "timeInStatuses": {
+        "In progress": 0,
+        "In Review": 0,
+        "Tested": 0,
+        "Ready to release": 325
+      },
+      "switchesBetweenStatuses": {
+        "To Do -> In progress": 1,
+        "In progress -> In Review": 1,
+        "In Review -> Tested": 1,
+        "Tested -> Ready to release": 1,
+        "Ready to release -> Done": 1
+      }
+    },
+  ]);
+});
+
+test("buildCsv: make a CSV with switches", () => {
+  const tickets = [{
+    "key": "RET-3027",
+    "timeInStatuses": {
+      "In progress": 0,
+      "In Review": 0,
+      "Tested": 0,
+      "Ready to release": 325
+    },
+    "switchesBetweenStatuses": {
+      "To Do -> In progress": 1,
+      "In progress -> In Review": 1,
+      "In Review -> Tested": 1,
+      "Tested -> Ready to release": 1,
+      "Ready to release -> Done": 1
+    }
+  },];
+
+  const csvBuildConfig: CsvBuildConfig = {
+    interestedStatusesForTimeCalculations: [],
+    switchesBetweenStatuses: [{ from: "ToDo", to: "In progress" }]
+  };
+
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, ToDo -> In progress\nRET-3027, 1")
+})
 
 test.run();
