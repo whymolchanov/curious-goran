@@ -84,9 +84,7 @@ export const buildCsv = (
   // TODO(improvement): add ts-lint. I don't like to run all the code for checking
   // TODO(improvement): key should be set by the code, not by a human
   if (interestedStatusesForTimeCalculations[0] !== "key") {
-    throw new Error(
-      'First column in CSV teamplate has to be "key"! Please add it to the CSV template as a first item'
-    );
+    interestedStatusesForTimeCalculations.unshift("key");
   }
 
   result.push(interestedStatusesForTimeCalculations.join(", "));

@@ -175,7 +175,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
   );
 });
 
-const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["key", "Waiting for Development", "In Testing"], switchesBetweenStatuses: [] };
+const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"], switchesBetweenStatuses: [] };
 test("buildCsv with empty spaces", () => {
   assert.equal(
     buildCsv(
@@ -220,29 +220,6 @@ test("buildCsv with zeros", () => {
     ),
     [csvBuildConfig1.interestedStatusesForTimeCalculations.join(", "), "RET-2922, 0, 0"].join("\n")
   );
-});
-
-const csvBuildConfig2: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"], "switchesBetweenStatuses": [] };
-test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
-  assert.throws(() => {
-    buildCsv(
-      [
-        {
-          key: "RET-2922",
-          timeInStatuses: {
-            "In progress": 0,
-            "In Review": 0,
-            "Ready for Testing": 0,
-            "In Testing": 0,
-            "Ready to release": 6,
-          },
-          switchesBetweenStatuses: {}
-        },
-      ],
-      csvBuildConfig2,
-      { setZeroInsteadOfNull: true }
-    );
-  });
 });
 
 // TODO(improve): this test doesn't pass
