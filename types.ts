@@ -22,20 +22,20 @@ export interface Transition {
   }[];
 }
 
-interface HistoryItem {
+interface JiraTicketHistoryItem {
   field: string;
   fromString: string;
   toString: string;
 }
 
-export interface History {
+export interface JiraTicketHistory {
   created: string;
-  items: HistoryItem[];
+  items: JiraTicketHistoryItem[];
 }
 
-export interface Issue {
+export interface JiraTicket {
   key: string;
   changelog: {
-    histories: History[];
+    histories: JiraTicketHistory[];
   };
 }

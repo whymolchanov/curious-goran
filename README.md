@@ -38,7 +38,7 @@
 ## Request data by filter
 
 1. Run `npm run get <filterId>` (example: `npm run get 666`)
-2. Script will go through all pages, collect all issues and put them to `./data/source.json`
+2. Script will go through all pages, collect all JiraTickets data and put them to `./data/source.json`
 
 ---
 

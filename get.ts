@@ -6,7 +6,7 @@ import { config } from "dotenv";
 config();
 
 // TODO(improvement): move all source code to the "src" folder.
-import { Issue } from "./types";
+import { JiraTicket } from "./types";
 
 const STREAM = createWriteStream("./data/source.json");
 
@@ -35,7 +35,7 @@ const getFilterUrl = async () => {
 
 const get = async () => {
   let totalNumber = Infinity;
-  let result: Issue[] = [];
+  let result: JiraTicket[] = [];
 
   console.log("Getting right URL for your filter...");
   const filterUrl = await getFilterUrl();
