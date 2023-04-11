@@ -9,7 +9,7 @@ import { config } from "./config";
 console.log("Start converting Jira issues to CSV...");
 
 const tickets = require("./data/tickets.json") as Ticket[];
-const csvTemplate = require("./data/csv-template.json") as CsvBuildConfig;
+const csvTemplate = require("./data/csv-build-config.json") as CsvBuildConfig;
 const csv = buildCsv(tickets, csvTemplate, config);
 
 console.log("Writting to the result.csv file...");

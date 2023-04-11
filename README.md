@@ -25,9 +25,9 @@
 
 #### CSV template
 
-5. Check `data` folder and find `csv-template.example.json` file.
+5. Check `data` folder and find `csv-build-config.example.json` file.
 6. Add your own statuses to the csv in the order you would like. **key is required column!**
-7. Rename `csv-template.example.json` to `csv-template.json`
+7. Rename `csv-build-config.example.json` to `csv-build-config.json`
 
 #### Config (optional)
 
