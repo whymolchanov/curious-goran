@@ -8,17 +8,8 @@
         "Ready to release"
     ],
     "switchesBetweenStatuses": [
-        {
-            "from": "In Testing",
-            "to": "!Ready to release"
-        },
-        {
-            "from": "In Review",
-            "to": "!Ready for Testing"
-        },
-        {
-          "from": "In Review",
-          "to": "In progress"
-        }
+        "In Testing -> Ready to release",
+        "In Review -> Ready for Testing",
+        "In Review -> In progress"
     ]
 }

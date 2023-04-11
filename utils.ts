@@ -80,19 +80,23 @@ export const buildCsv = (
   config: Pick<Config, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
-  const { interestedStatusesForTimeCalculations } = csvBuildConfig;
+  const { interestedStatusesForTimeCalculations, switchesBetweenStatuses } = csvBuildConfig;
   // TODO(improvement): add ts-lint. I don't like to run all the code for checking
   // TODO(improvement): key should be set by the code, not by a human
   if (interestedStatusesForTimeCalculations[0] !== "key") {
     interestedStatusesForTimeCalculations.unshift("key");
   }
 
-  result.push(interestedStatusesForTimeCalculations.join(", "));
+  const accumulatedArrays = [...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
 
-  tickets.forEach(({ key, timeInStatuses }) => {
-    const csvRow: (string | number | null)[] = interestedStatusesForTimeCalculations.map((item) => {
-      if (timeInStatuses[item] !== undefined) {
-        return timeInStatuses[item];
+  result.push(accumulatedArrays.join(", "));
+
+  tickets.forEach(({ key, timeInStatuses, switchesBetweenStatuses }) => {
+    const sum = { ...timeInStatuses, ...switchesBetweenStatuses };
+
+    const csvRow: (string | number | null)[] = accumulatedArrays.map((item) => {
+      if (sum[item] !== undefined) {
+        return sum[item];
       }
 
       return config.setZeroInsteadOfNull ? 0 : null;

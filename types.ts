@@ -6,13 +6,14 @@ export type CsvRow = string;
 
 export type JiraTicketStatus = string;
 
-export interface CsvBuildConfig {
-  interestedStatusesForTimeCalculations: JiraTicketStatus[];
-  switchesBetweenStatuses: { from: JiraTicketStatus; to: JiraTicketStatus }[]
-};
-
 // example: "In review -> In progress"
 export type StatusSwitchString = string;
+
+export interface CsvBuildConfig {
+  interestedStatusesForTimeCalculations: JiraTicketStatus[];
+  switchesBetweenStatuses: StatusSwitchString[]
+};
+
 export type Count = number;
 export type StatusSwitches = Record<StatusSwitchString, Count>;
 
