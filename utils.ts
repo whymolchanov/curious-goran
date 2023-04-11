@@ -56,7 +56,7 @@ export const calculateHowMuchTimeWasInEveryStatus = (
     const secondDate = DateTime.fromISO(second.when);
     const delta: Duration = secondDate.diff(firstDate, [config.timeUnit]);
 
-    return { [second.fromStatus]: Math.floor(delta.get(config.timeUnit)) };
+    return { [second.fromStatus]: Math.round(delta.get(config.timeUnit)) };
   });
 
   return arrayOfDurations.reduce((acc, item) => {
