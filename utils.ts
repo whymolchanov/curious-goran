@@ -73,23 +73,26 @@ export const calculateHowMuchTimeWasInEveryStatus = (
   }, {});
 };
 
+
 export const buildCsv = (
   tickets: Ticket[],
-  csvTemplate: CsvBuildConfig,
+  csvBuildConfig: CsvBuildConfig,
   config: Pick<Config, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
-
-  if (csvTemplate[0] !== "key") {
+  const { interestedStatusesForTimeCalculations } = csvBuildConfig;
+  // TODO(improvement): add ts-lint. I don't like to run all the code for checking
+  // TODO(improvement): key should be set by the code, not by a human
+  if (interestedStatusesForTimeCalculations[0] !== "key") {
     throw new Error(
       'First column in CSV teamplate has to be "key"! Please add it to the CSV template as a first item'
     );
   }
 
-  result.push(csvTemplate.join(", "));
+  result.push(interestedStatusesForTimeCalculations.join(", "));
 
   tickets.forEach(({ key, statuses }) => {
-    const csvRow: (string | number | null)[] = csvTemplate.map((item) => {
+    const csvRow: (string | number | null)[] = interestedStatusesForTimeCalculations.map((item) => {
       if (statuses[item] !== undefined) {
         return statuses[item];
       }

@@ -4,7 +4,9 @@ export type CsvPresentation = CsvRow[];
 
 export type CsvRow = string;
 
-export type CsvBuildConfig = string[];
+export interface CsvBuildConfig {
+  interestedStatusesForTimeCalculations: string[];
+};
 
 export interface Ticket {
   key: string;

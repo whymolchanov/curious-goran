@@ -1,5 +1,7 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
+// TODO(improvement): solve the problem with dots in the paths
+import { CsvBuildConfig } from "../types";
 import {
   buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
@@ -172,7 +174,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
   );
 });
 
-const csvTemplate = ["key", "Waiting for Development", "In Testing"];
+const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["key", "Waiting for Development", "In Testing"] };
 test("buildCsv with empty spaces", () => {
   assert.equal(
     buildCsv(
@@ -188,10 +190,10 @@ test("buildCsv with empty spaces", () => {
           },
         },
       ],
-      csvTemplate,
+      csvBuildConfig1,
       { setZeroInsteadOfNull: false }
     ),
-    [csvTemplate.join(", "), "RET-2922, , 0"].join("\n")
+    [csvBuildConfig1.interestedStatusesForTimeCalculations.join(", "), "RET-2922, , 0"].join("\n")
   );
 });
 
@@ -210,14 +212,14 @@ test("buildCsv with zeros", () => {
           },
         },
       ],
-      csvTemplate,
+      csvBuildConfig1,
       { setZeroInsteadOfNull: true }
     ),
-    [csvTemplate.join(", "), "RET-2922, 0, 0"].join("\n")
+    [csvBuildConfig1.interestedStatusesForTimeCalculations.join(", "), "RET-2922, 0, 0"].join("\n")
   );
 });
 
-const csvTemplateWithoutKey = ["Waiting for Development", "In Testing"];
+const csvBuildConfig2: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"] };
 test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
   assert.throws(() => {
     buildCsv(
@@ -233,7 +235,7 @@ test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
           },
         },
       ],
-      csvTemplateWithoutKey,
+      csvBuildConfig2,
       { setZeroInsteadOfNull: true }
     );
   });
