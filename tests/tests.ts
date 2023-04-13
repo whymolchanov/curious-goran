@@ -229,7 +229,8 @@ const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
 test("Convert JiraTicket to Ticket", () => {
   assert.equal(createTickets(jiraTicketsData), [
     {
-      "key": "RET-3027",
+      "key": "RET-3072",
+      "title": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
       "timeInStatuses": {
         "In progress": 0,
         "In Review": 0,
