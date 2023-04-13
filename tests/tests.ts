@@ -1,13 +1,13 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
 // TODO(improvement): solve the problem with dots in the paths
-import { CsvBuildConfig } from "../types";
+import { CsvBuildConfig } from "../src/types";
 import {
   buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
   withoutNull,
-} from "../utils";
+} from "../src/utils";
 
 test("sliced pairs for numbers", () => {
   assert.equal(createSlicedPairsFromArray([1, 2, 3]), [

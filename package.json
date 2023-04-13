@@ -4,9 +4,9 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "get": "ts-node get.ts",
-    "convert-jira-tickets-to-tickets": "ts-node convert.ts",
-    "csv": "ts-node make-csv.ts",
+    "get": "ts-node src/get.ts",
+    "convert-jira-tickets-to-tickets": "ts-node src/convert.ts",
+    "csv": "ts-node src/make-csv.ts",
     "test": "uvu -r tsm tests",
     "test:watch": "uvu -r tsm tests -w",
     "coverage": "c8 npm run test",
