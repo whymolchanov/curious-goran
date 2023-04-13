@@ -21,13 +21,13 @@
 
 ### CSV build config
 *Curious Goran will add "key" and "title" to resulted CSV. So you shouldn't use this fileds in the csv-build-convig.json*
-5. Check `data` folder and find `csv-build-config.example.json` file.
-6. Add your own statuses to the csv in the order you would like.
-7. Rename `csv-build-config.example.json` to `csv-build-config.json`
+1. Check `/data/csv-build-config.example.json` file.
+2. Add your own statuses to the csv in the order you would like.
+3. Rename `csv-build-config.example.json` to `csv-build-config.json`
 
 ### Curious Goran config (optional)
 
-8. Check `config.ts` file. There you will find the configuration for Curious Goran. If you need it, change fields in a way you like it.
+8. Check `/src/config.ts` file. There you will find the configuration for Curious Goran. If you need it, change fields in a way you like it.
 
 ---
 
