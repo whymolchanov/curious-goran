@@ -42,6 +42,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
       },
       {
         key: "RET-2922",
+        title: "something for test",
         transitions: [
           {
             when: "2023-01-20T02:04:08.561+0300",
@@ -103,6 +104,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
       { timeUnit: "hours" },
       {
         key: "RET-2768",
+        title: "super",
         transitions: [
           {
             when: "2022-10-28T13:13:13.345+0300",
@@ -181,6 +183,7 @@ test("buildCsv with empty spaces", () => {
       [
         {
           key: "RET-2922",
+          title: "something for test",
           timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
@@ -194,7 +197,7 @@ test("buildCsv with empty spaces", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: false }
     ),
-    [csvBuildConfig1.interestedStatusesForTimeCalculations.join(", "), "RET-2922, , 0"].join("\n")
+    [["key", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), "RET-2922, something for test, , 0"].join("\n")
   );
 });
 
@@ -204,6 +207,7 @@ test("buildCsv with zeros", () => {
       [
         {
           key: "RET-2922",
+          title: "something for test",
           timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
@@ -217,7 +221,7 @@ test("buildCsv with zeros", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: true }
     ),
-    [csvBuildConfig1.interestedStatusesForTimeCalculations.join(", "), "RET-2922, 0, 0"].join("\n")
+    ["key, title, Waiting for Development, In Testing", "RET-2922, something for test, 0, 0"].join("\n")
   );
 });
 
@@ -247,6 +251,7 @@ test("buildCsv with zeros", () => {
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{
     "key": "RET-3027",
+    "title": "something for test",
     "timeInStatuses": {
       "In progress": 0,
       "In Review": 0,
@@ -267,7 +272,7 @@ test("buildCsv: make a CSV with switches", () => {
     switchesBetweenStatuses: ["To Do -> In progress"]
   };
 
-  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, To Do -> In progress\nRET-3027, 1")
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, title, To Do -> In progress\nRET-3027, something for test, 1")
 })
 
 test.run();

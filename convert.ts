@@ -27,14 +27,14 @@ const makeTransitionsFromChangelogHistory = (history: JiraTicketHistory) => {
 };
 
 export const makeTransitions = (issues: JiraTicket[]): Transition[] => {
-    return issues.map(({ key, changelog }) => {
+    return issues.map(({ key, fields: { summary }, changelog }) => {
         const transitions = changelog.histories
             .map((history) => {
                 return makeTransitionsFromChangelogHistory(history);
             })
             .reverse();
 
-        return { key, transitions: withoutNull(transitions) };
+        return { key, title: summary, transitions: withoutNull(transitions) };
     });
 };
 
@@ -58,6 +58,7 @@ export const createTickets = (data: JiraTicket[]): Ticket[] => {
     return makeTransitions(data).map((item) => {
         return {
             key: item.key,
+            title: item.title,
             timeInStatuses: calculateHowMuchTimeWasInEveryStatus(config, item),
             switchesBetweenStatuses: calculateSwitches(item),
         };

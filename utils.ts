@@ -73,7 +73,7 @@ export const calculateHowMuchTimeWasInEveryStatus = (
   }, {});
 };
 
-
+// TODO(improvement): remove from utils
 export const buildCsv = (
   tickets: Ticket[],
   csvBuildConfig: CsvBuildConfig,
@@ -81,17 +81,11 @@ export const buildCsv = (
 ): Csv => {
   const result: CsvPresentation = [];
   const { interestedStatusesForTimeCalculations, switchesBetweenStatuses } = csvBuildConfig;
-  // TODO(improvement): add ts-lint. I don't like to run all the code for checking
-  // TODO(improvement): key should be set by the code, not by a human
-  if (interestedStatusesForTimeCalculations[0] !== "key") {
-    interestedStatusesForTimeCalculations.unshift("key");
-  }
-
-  const accumulatedArrays = [...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
+  const accumulatedArrays = ["key", "title", ...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
 
   result.push(accumulatedArrays.join(", "));
 
-  tickets.forEach(({ key, timeInStatuses, switchesBetweenStatuses }) => {
+  tickets.forEach(({ key, title, timeInStatuses, switchesBetweenStatuses }) => {
     const sum = { ...timeInStatuses, ...switchesBetweenStatuses };
 
     const csvRow: (string | number | null)[] = accumulatedArrays.map((item) => {
@@ -102,6 +96,7 @@ export const buildCsv = (
       return config.setZeroInsteadOfNull ? 0 : null;
     });
     csvRow[0] = key;
+    csvRow[1] = title;
 
     result.push(csvRow.join(", "));
   });
