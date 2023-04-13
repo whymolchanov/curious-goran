@@ -5,7 +5,6 @@ import { exit } from "process";
 import { config } from "dotenv";
 config();
 
-// TODO(improvement): move all source code to the "src" folder.
 import { JiraTicket } from "./types";
 
 const STREAM = createWriteStream("./data/source.json");

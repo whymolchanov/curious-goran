@@ -1,9 +1,8 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
-// TODO(improvement): solve the problem with dots in the paths
+import { buildCsv } from "../src/make-csv";
 import { CsvBuildConfig } from "../src/types";
 import {
-  buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
   withoutNull,
