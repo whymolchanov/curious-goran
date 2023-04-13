@@ -3,6 +3,10 @@
 - Request data from Jira based on particular filter ID
 - Create a CSV file with time statistics (in days or hours) on every ticket and count how many times ticket switched from one status to another.
 
+## Request data
+1. Run `ID=<Jira filterID> npm run goran` (example: `ID=666 npm run goran`)
+
+
 ---
 
 ## Setup
@@ -30,10 +34,6 @@
 8. Check `/src/config.ts` file. There you will find the configuration for Curious Goran. If you need it, change fields in a way you like it.
 
 ---
-
-## Request data
-<!-- TODO(improvement): write a goran npm script -->
-1. Run `npm run goran <Jira filterId>` (example: `npm run goran 666`)
 
 ## How does it work?
 ### Getting JiraTickets from Jira

@@ -64,4 +64,5 @@ get()
   .catch((error) => {
     console.log("Error happens:");
     console.log(error);
+    exit(1);
   });

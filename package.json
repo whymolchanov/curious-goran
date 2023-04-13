@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "goran": "npm run get $ID && npm run convert-jira-tickets-to-tickets && npm run csv",
     "get": "ts-node src/get.ts",
     "convert-jira-tickets-to-tickets": "ts-node src/convert.ts",
     "csv": "ts-node src/make-csv.ts",
