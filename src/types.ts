@@ -40,9 +40,8 @@ export interface Transition {
 
 interface JiraTicketHistoryItem {
   field: string;
-  // TODO(improvement): maybe this is JiraTicketStatus as well?
-  fromString: string;
-  toString: string;
+  fromString: JiraTicketStatus;
+  toString: JiraTicketStatus;
 }
 
 export interface JiraTicketHistory {
