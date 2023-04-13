@@ -4,9 +4,9 @@ import {
   Csv,
   CsvPresentation,
   CsvRow,
-  CsvTemplate,
-  StatusesDurations,
-  TimedStatus,
+  CsvBuildConfig,
+  TimeInStatus,
+  Ticket,
   Transition,
 } from "./types";
 
@@ -40,7 +40,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 export const calculateHowMuchTimeWasInEveryStatus = (
   config: Pick<Config, "timeUnit">,
   source: Transition
-): StatusesDurations => {
+): TimeInStatus => {
   const { transitions } = source;
   const transitionsWithoutSameStatuses = transitions.filter(
     (transition) => transition.fromStatus !== transition.toStatus
@@ -56,7 +56,7 @@ export const calculateHowMuchTimeWasInEveryStatus = (
     const secondDate = DateTime.fromISO(second.when);
     const delta: Duration = secondDate.diff(firstDate, [config.timeUnit]);
 
-    return { [second.fromStatus]: Math.floor(delta.get(config.timeUnit)) };
+    return { [second.fromStatus]: Math.round(delta.get(config.timeUnit)) };
   });
 
   return arrayOfDurations.reduce((acc, item) => {
@@ -71,35 +71,4 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 
     return acc;
   }, {});
-};
-
-export const buildCsv = (
-  timedStatuses: TimedStatus[],
-  csvTemplate: CsvTemplate,
-  config: Pick<Config, "setZeroInsteadOfNull">
-): Csv => {
-  const result: CsvPresentation = [];
-
-  if (csvTemplate[0] !== "key") {
-    throw new Error(
-      'First column in CSV teamplate has to be "key"! Please add it to the CSV template as a first item'
-    );
-  }
-
-  result.push(csvTemplate.join(", "));
-
-  timedStatuses.forEach(({ key, statuses }) => {
-    const csvRow: (string | number | null)[] = csvTemplate.map((item) => {
-      if (statuses[item] !== undefined) {
-        return statuses[item];
-      }
-
-      return config.setZeroInsteadOfNull ? 0 : null;
-    });
-    csvRow[0] = key;
-
-    result.push(csvRow.join(", "));
-  });
-
-  return result.join("\n");
 };

@@ -1,0 +1,15 @@
+{
+    "interestedStatusesForTimeCalculations": [
+        "Waiting for Development",
+        "In progress",
+        "In Review",
+        "Ready for Testing",
+        "In Testing",
+        "Ready to release"
+    ],
+    "switchesBetweenStatuses": [
+        "In Testing -> Ready to release",
+        "In Review -> Ready for Testing",
+        "In Review -> In progress"
+    ]
+}

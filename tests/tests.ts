@@ -1,11 +1,13 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
+import { createTickets } from "../src/convert";
+import { buildCsv } from "../src/make-csv";
+import { CsvBuildConfig, JiraTicket } from "../src/types";
 import {
-  buildCsv,
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
   withoutNull,
-} from "../utils";
+} from "../src/utils";
 
 test("sliced pairs for numbers", () => {
   assert.equal(createSlicedPairsFromArray([1, 2, 3]), [
@@ -40,6 +42,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
       },
       {
         key: "RET-2922",
+        title: "something for test",
         transitions: [
           {
             when: "2023-01-20T02:04:08.561+0300",
@@ -90,7 +93,7 @@ test("calculateHowMuchTimeWasInEveryStatusInDays", () => {
       "In Review": 0,
       "Ready for Testing": 0,
       "In Testing": 0,
-      "Ready to release": 5,
+      "Ready to release": 6,
     }
   );
 });
@@ -101,6 +104,7 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
       { timeUnit: "hours" },
       {
         key: "RET-2768",
+        title: "super",
         transitions: [
           {
             when: "2022-10-28T13:13:13.345+0300",
@@ -161,37 +165,39 @@ test("calculateHowMuchTimeWasInEveryStatusInHours", () => {
       }
     ),
     {
-      "Selected for Development": 0,
-      "In progress": 82,
-      "In Review": 34,
+      "Selected for Development": 1,
+      "In progress": 83,
+      "In Review": 35,
       "Ready for Testing": 26,
-      "In Testing": 58,
-      Tested: 4,
+      "In Testing": 59,
+      Tested: 6,
       "Ready to release": 38,
     }
   );
 });
 
-const csvTemplate = ["key", "Waiting for Development", "In Testing"];
+const csvBuildConfig1: CsvBuildConfig = { interestedStatusesForTimeCalculations: ["Waiting for Development", "In Testing"], switchesBetweenStatuses: [] };
 test("buildCsv with empty spaces", () => {
   assert.equal(
     buildCsv(
       [
         {
           key: "RET-2922",
-          statuses: {
+          title: "something for test",
+          timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
             "In Testing": 0,
             "Ready to release": 6,
           },
+          switchesBetweenStatuses: {}
         },
       ],
-      csvTemplate,
+      csvBuildConfig1,
       { setZeroInsteadOfNull: false }
     ),
-    [csvTemplate.join(", "), "RET-2922, , 0"].join("\n")
+    [["key", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), "RET-2922, something for test, , 0"].join("\n")
   );
 });
 
@@ -201,42 +207,72 @@ test("buildCsv with zeros", () => {
       [
         {
           key: "RET-2922",
-          statuses: {
+          title: "something for test",
+          timeInStatuses: {
             "In progress": 0,
             "In Review": 0,
             "Ready for Testing": 0,
             "In Testing": 0,
             "Ready to release": 6,
           },
+          switchesBetweenStatuses: {}
         },
       ],
-      csvTemplate,
+      csvBuildConfig1,
       { setZeroInsteadOfNull: true }
     ),
-    [csvTemplate.join(", "), "RET-2922, 0, 0"].join("\n")
+    ["key, title, Waiting for Development, In Testing", "RET-2922, something for test, 0, 0"].join("\n")
   );
 });
 
-const csvTemplateWithoutKey = ["Waiting for Development", "In Testing"];
-test("buildCsv with bad csvTemplate (template doesn't have key column)", () => {
-  assert.throws(() => {
-    buildCsv(
-      [
-        {
-          key: "RET-2922",
-          statuses: {
-            "In progress": 0,
-            "In Review": 0,
-            "Ready for Testing": 0,
-            "In Testing": 0,
-            "Ready to release": 6,
-          },
-        },
-      ],
-      csvTemplateWithoutKey,
-      { setZeroInsteadOfNull: true }
-    );
-  });
+const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
+test("Convert JiraTicket to Ticket", () => {
+  assert.equal(createTickets(jiraTicketsData), [
+    {
+      "key": "RET-3072",
+      "title": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+      "timeInStatuses": {
+        "In progress": 0,
+        "In Review": 0,
+        "Tested": 0,
+        "Ready to release": 325
+      },
+      "switchesBetweenStatuses": {
+        "To Do -> In progress": 1,
+        "In progress -> In Review": 1,
+        "In Review -> Tested": 1,
+        "Tested -> Ready to release": 1,
+        "Ready to release -> Done": 1
+      }
+    }
+  ]);
 });
+
+test("buildCsv: make a CSV with switches", () => {
+  const tickets = [{
+    "key": "RET-3027",
+    "title": "something for test",
+    "timeInStatuses": {
+      "In progress": 0,
+      "In Review": 0,
+      "Tested": 0,
+      "Ready to release": 325
+    },
+    "switchesBetweenStatuses": {
+      "To Do -> In progress": 1,
+      "In progress -> In Review": 1,
+      "In Review -> Tested": 1,
+      "Tested -> Ready to release": 1,
+      "Ready to release -> Done": 1
+    }
+  },];
+
+  const csvBuildConfig: CsvBuildConfig = {
+    interestedStatusesForTimeCalculations: [],
+    switchesBetweenStatuses: ["To Do -> In progress"]
+  };
+
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, title, To Do -> In progress\nRET-3027, something for test, 1")
+})
 
 test.run();
