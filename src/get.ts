@@ -1,13 +1,10 @@
 import axios from "axios";
 import { createWriteStream } from "fs";
-import { exit } from "process";
 
 import { config } from "dotenv";
 config();
 
 import { JiraTicket } from "./types";
-
-const STREAM = createWriteStream("./data/source.json");
 
 const AXIOS_INSTANCE = axios.create({
   baseURL: process.env.JIRA_BASE_URL + "rest/api/2/",
@@ -32,7 +29,7 @@ const getFilterUrl = async () => {
   return searchUrl;
 };
 
-const get = async () => {
+export const get = async () => {
   let totalNumber = Infinity;
   let result: JiraTicket[] = [];
 
@@ -52,17 +49,7 @@ const get = async () => {
 
     console.log(`There are ${totalNumber - result.length} issues more`);
   }
-  console.log("Writting to the source.json file...");
-  STREAM.write(JSON.stringify(result));
+
+  return result;
 };
 
-get()
-  .then(() => {
-    console.log("Process of getting issues has been completed");
-    exit(0);
-  })
-  .catch((error) => {
-    console.log("Error happens:");
-    console.log(error);
-    exit(1);
-  });

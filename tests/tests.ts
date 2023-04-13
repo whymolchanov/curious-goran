@@ -1,7 +1,8 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
+import { createTickets } from "../src/convert";
 import { buildCsv } from "../src/make-csv";
-import { CsvBuildConfig } from "../src/types";
+import { CsvBuildConfig, JiraTicket } from "../src/types";
 import {
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
@@ -224,28 +225,27 @@ test("buildCsv with zeros", () => {
   );
 });
 
-// TODO(improve): this test doesn't pass
-// const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
-// test("Convert JiraTicket to Ticket", () => {
-//   assert.equal(createTickets(jiraTicketsData), [
-//     {
-//       "key": "RET-3027",
-//       "timeInStatuses": {
-//         "In progress": 0,
-//         "In Review": 0,
-//         "Tested": 0,
-//         "Ready to release": 325
-//       },
-//       "switchesBetweenStatuses": {
-//         "To Do -> In progress": 1,
-//         "In progress -> In Review": 1,
-//         "In Review -> Tested": 1,
-//         "Tested -> Ready to release": 1,
-//         "Ready to release -> Done": 1
-//       }
-//     }
-//   ]);
-// });
+const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
+test("Convert JiraTicket to Ticket", () => {
+  assert.equal(createTickets(jiraTicketsData), [
+    {
+      "key": "RET-3027",
+      "timeInStatuses": {
+        "In progress": 0,
+        "In Review": 0,
+        "Tested": 0,
+        "Ready to release": 325
+      },
+      "switchesBetweenStatuses": {
+        "To Do -> In progress": 1,
+        "In progress -> In Review": 1,
+        "In Review -> Tested": 1,
+        "Tested -> Ready to release": 1,
+        "Ready to release -> Done": 1
+      }
+    }
+  ]);
+});
 
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{

@@ -1,6 +1,3 @@
-const issues = require("../data/source.json") as JiraTicket[];
-import { createWriteStream } from "fs";
-import { exit } from "process";
 import { JiraTicketHistory, Transition, Ticket, JiraTicket, StatusSwitches, StatusSwitchString } from "./types";
 import {
     calculateHowMuchTimeWasInEveryStatus,
@@ -64,12 +61,3 @@ export const createTickets = (data: JiraTicket[]): Ticket[] => {
         };
     });
 };
-
-const tickets = createTickets(issues);
-
-const STREAM_PATH = "./data/tickets.json";
-const STREAM = createWriteStream(STREAM_PATH);
-STREAM.write(JSON.stringify(tickets), () => {
-    console.log("Done!");
-    exit(0);
-});

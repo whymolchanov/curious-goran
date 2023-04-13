@@ -1,7 +1,5 @@
-import { createWriteStream } from "fs";
-import { exit } from "process";
 import { Ticket, CsvBuildConfig, Csv, CsvPresentation } from "./types";
-import { Config, config } from "./config";
+import { Config } from "./config";
 
 export const buildCsv = (
   tickets: Ticket[],
@@ -33,17 +31,3 @@ export const buildCsv = (
   return result.join("\n");
 };
 
-console.log("Start converting Jira issues to CSV...");
-
-const tickets = require("../data/tickets.json") as Ticket[];
-const csvTemplate = require("../data/csv-build-config.json") as CsvBuildConfig;
-const csv = buildCsv(tickets, csvTemplate, config);
-
-console.log("Writting to the result.csv file...");
-
-const STREAM_PATH = "./data/result.csv";
-const STREAM = createWriteStream(STREAM_PATH);
-STREAM.write(csv, () => {
-  console.log("Done!");
-  exit(0);
-});
