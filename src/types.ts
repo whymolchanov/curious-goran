@@ -25,7 +25,7 @@ export type Count = number;
 export type StatusSwitches = Record<StatusSwitchString, Count>;
 
 export interface Ticket {
-  key: JiraTicketKey;
+  url: JiraTicketUrl;
   title: JiraTicketTitle;
   timeInStatuses: TimeInStatus;
   switchesBetweenStatuses: StatusSwitches;

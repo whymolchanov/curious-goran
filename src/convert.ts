@@ -1,9 +1,13 @@
 import { JiraTicketHistory, Transition, Ticket, JiraTicket, StatusSwitches, StatusSwitchString } from "./types";
 import {
     calculateHowMuchTimeWasInEveryStatus,
+    makeJiraTicketUrl,
     withoutNull,
 } from "./utils";
-import { config } from "./config";
+import { config as curiousGoranConfig } from "./config";
+
+import { config } from "dotenv";
+config();
 
 const makeTransitionsFromChangelogHistory = (history: JiraTicketHistory) => {
     const { created, items } = history;
@@ -52,11 +56,17 @@ const calculateSwitches = (item: Transition): StatusSwitches => {
 }
 
 export const createTickets = (data: JiraTicket[]): Ticket[] => {
+    const baseUrl = process.env.JIRA_BASE_URL;
+
+    if (!baseUrl) {
+        throw new Error("You didn't specify JIRA_BASE_URL in the .env file.");
+    }
+
     return makeTransitions(data).map((item) => {
         return {
-            key: item.key,
+            url: makeJiraTicketUrl(baseUrl, item.key),
             title: item.title,
-            timeInStatuses: calculateHowMuchTimeWasInEveryStatus(config, item),
+            timeInStatuses: calculateHowMuchTimeWasInEveryStatus(curiousGoranConfig, item),
             switchesBetweenStatuses: calculateSwitches(item),
         };
     });

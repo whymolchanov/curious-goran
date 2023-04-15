@@ -10,6 +10,38 @@ import {
   withoutNull,
 } from "../src/utils";
 
+const JIRA_BASE_URL_FOR_TESTING = 'https://super-puper.com';
+const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
+
+test("createTickets", () => {
+  process.env.JIRA_BASE_URL = JIRA_BASE_URL_FOR_TESTING;
+
+  assert.equal(createTickets(jiraTicketsData), [
+    {
+      "url": `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3072`,
+      "title": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
+      "timeInStatuses": {
+        "In progress": 0,
+        "In Review": 0,
+        "Tested": 0,
+        "Ready to release": 325
+      },
+      "switchesBetweenStatuses": {
+        "To Do -> In progress": 1,
+        "In progress -> In Review": 1,
+        "In Review -> Tested": 1,
+        "Tested -> Ready to release": 1,
+        "Ready to release -> Done": 1
+      }
+    }
+  ]);
+});
+
+test("createTickets: user forget to set JIRA_BASE_URL environment variable", () => {
+  process.env.JIRA_BASE_URL = '';
+  assert.throws(() => createTickets(jiraTicketsData));
+});
+
 test("sliced pairs for numbers", () => {
   assert.equal(createSlicedPairsFromArray([1, 2, 3]), [
     [1, 2],
@@ -183,7 +215,7 @@ test("buildCsv with empty spaces", () => {
     buildCsv(
       [
         {
-          key: "RET-2922",
+          url: `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922`,
           title: "something for test",
           timeInStatuses: {
             "In progress": 0,
@@ -198,7 +230,7 @@ test("buildCsv with empty spaces", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: false }
     ),
-    [["key", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), "RET-2922, something for test, , 0"].join("\n")
+    [["url", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922, something for test, , 0`].join("\n")
   );
 });
 
@@ -207,7 +239,7 @@ test("buildCsv with zeros", () => {
     buildCsv(
       [
         {
-          key: "RET-2922",
+          url: `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922`,
           title: "something for test",
           timeInStatuses: {
             "In progress": 0,
@@ -222,36 +254,14 @@ test("buildCsv with zeros", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: true }
     ),
-    ["key, title, Waiting for Development, In Testing", "RET-2922, something for test, 0, 0"].join("\n")
+    ["url, title, Waiting for Development, In Testing", `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922, something for test, 0, 0`].join("\n")
   );
 });
 
-const jiraTicketsData = require('./jira-tickets-data.json') as JiraTicket[];
-test("Convert JiraTicket to Ticket", () => {
-  assert.equal(createTickets(jiraTicketsData), [
-    {
-      "key": "RET-3072",
-      "title": "[Web] Treatment Monitoring Release Manager: add an error when it finds that it is a release branch with the same version as the lates release",
-      "timeInStatuses": {
-        "In progress": 0,
-        "In Review": 0,
-        "Tested": 0,
-        "Ready to release": 325
-      },
-      "switchesBetweenStatuses": {
-        "To Do -> In progress": 1,
-        "In progress -> In Review": 1,
-        "In Review -> Tested": 1,
-        "Tested -> Ready to release": 1,
-        "Ready to release -> Done": 1
-      }
-    }
-  ]);
-});
 
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{
-    "key": "RET-3027",
+    "url": `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027`,
     "title": "something for test",
     "timeInStatuses": {
       "In progress": 0,
@@ -273,7 +283,7 @@ test("buildCsv: make a CSV with switches", () => {
     switchesBetweenStatuses: ["To Do -> In progress"]
   };
 
-  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, title, To Do -> In progress\nRET-3027, something for test, 1")
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), `url, title, To Do -> In progress\n${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027, something for test, 1`)
 })
 
 test("makeJiraTicketUrl function", () => {
