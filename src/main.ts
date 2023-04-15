@@ -45,7 +45,6 @@ const searchForWork = (): Work => {
 const run = async () => {
     console.log("Curious Goran starting to work...");
 
-    // TODO(): test with filterId
     const workList = searchForWork();
     const streams = workList.map(({ fileName }) => {
         return createWriteStream(`./data/${fileName}.csv`);
@@ -53,7 +52,6 @@ const run = async () => {
     const csvPresentations: CsvPresentation = [];
 
     for (const { fileName, url } of workList) {
-        // TODO(): add a new approach to the README.md
         console.log(`Start working regarding ${fileName}.csv\nUsing this path ${url}`);
         const jiraTickets: JiraTicket[] = await get(url);
         const tickets = createTickets(jiraTickets);
@@ -75,7 +73,6 @@ run().then(() => {
     console.log('Done!');
     exit(0);
 }).catch((error) => {
-    console.log("Error happens:");
     console.log(error);
     exit(1);
 });
