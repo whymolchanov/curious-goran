@@ -63,3 +63,5 @@ export interface JiraTicket {
     histories: JiraTicketHistory[];
   };
 }
+
+export type Work = { fileName: string; url: string }[]
