@@ -3,10 +3,23 @@
 - Request data from Jira based on particular filter ID
 - Create a CSV file with time statistics (in days or hours) on every ticket and count how many times ticket switched from one status to another.
 
-## Request data
+## Request data by filterID
 1. Run `npm start <Jira filterId>` (example: `npm start 666`)
 
 
+## Request data by JQL
+1. Add your JQLs to the `/data/jql.json` file (check the example in the `/data/jql.example.json` file)
+2. Run `npm start jql`
+3. Curious Goran will create a separate CSV file for each entry in the `/data/jql.json` file.
+For example from this `/data/jql.json` Curious Goran will make two files --> `Bob Torn.csv` and `Super heroes team.csv`. In both of them there will be a result of request.
+```
+{
+    [
+        {"Bob Torn": "assignee%20%3D5f7d8db66666666006f407c60"},
+        {"Super heroes team": "project%3D\"Super%20%26%20Heroes\""}
+    ]
+}
+``` 
 ---
 
 ## Setup
