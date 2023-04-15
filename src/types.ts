@@ -6,6 +6,11 @@ export type CsvRow = string;
 
 export type JiraTicketStatus = string;
 
+// example: RET-666
+export type JiraTicketKey = string;
+
+export type JiraTicketUrl = string;
+
 export type JiraTicketTitle = string;
 
 // example: "In review -> In progress"
@@ -20,7 +25,7 @@ export type Count = number;
 export type StatusSwitches = Record<StatusSwitchString, Count>;
 
 export interface Ticket {
-  key: string;
+  key: JiraTicketKey;
   title: JiraTicketTitle;
   timeInStatuses: TimeInStatus;
   switchesBetweenStatuses: StatusSwitches;
@@ -29,7 +34,7 @@ export interface Ticket {
 export type TimeInStatus = Record<JiraTicketStatus, number>;
 
 export interface Transition {
-  key: string;
+  key: JiraTicketKey;
   title: JiraTicketTitle;
   transitions: {
     when: string;
@@ -50,7 +55,7 @@ export interface JiraTicketHistory {
 }
 
 export interface JiraTicket {
-  key: string;
+  key: JiraTicketKey;
   fields: {
     summary: JiraTicketTitle;
   },

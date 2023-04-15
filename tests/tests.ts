@@ -6,6 +6,7 @@ import { CsvBuildConfig, JiraTicket } from "../src/types";
 import {
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
+  makeJiraTicketUrl,
   withoutNull,
 } from "../src/utils";
 
@@ -273,6 +274,10 @@ test("buildCsv: make a CSV with switches", () => {
   };
 
   assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), "key, title, To Do -> In progress\nRET-3027, something for test, 1")
+})
+
+test("makeJiraTicketUrl function", () => {
+  assert.equal(makeJiraTicketUrl('https://super-base.jira.com', 'RET-666'), 'https://super-base.jira.com/browse/RET-666')
 })
 
 test.run();

@@ -1,12 +1,9 @@
 import { DateTime, Duration } from "luxon";
 import { Config } from "./config";
 import {
-  Csv,
-  CsvPresentation,
-  CsvRow,
-  CsvBuildConfig,
+  JiraTicketKey,
+  JiraTicketUrl,
   TimeInStatus,
-  Ticket,
   Transition,
 } from "./types";
 
@@ -72,3 +69,7 @@ export const calculateHowMuchTimeWasInEveryStatus = (
     return acc;
   }, {});
 };
+
+export const makeJiraTicketUrl = (baseUrl: string, jiraTicketKey: JiraTicketKey): JiraTicketUrl => {
+  return `${baseUrl}/browse/${jiraTicketKey}`;
+}
