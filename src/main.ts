@@ -8,7 +8,7 @@ import { CsvBuildConfig, CsvPresentation, JiraTicket, Work } from "./types";
 const jqls = require('../data/jql.json') as Work;
 
 
-const allocateWork = (): Work => {
+const searchForWork = (): Work => {
     const JQL_ARGUMENT = 'jql';
 
     const [cliArg] = process.argv.slice(2);
@@ -46,7 +46,7 @@ const run = async () => {
     console.log("Curious Goran starting to work...");
 
     // TODO(): test with filterId
-    const workList = allocateWork();
+    const workList = searchForWork();
     const streams = workList.map(({ fileName }) => {
         return createWriteStream(`./data/${fileName}.csv`);
     })
