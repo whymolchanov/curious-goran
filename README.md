@@ -24,7 +24,7 @@
 4. Add base URL to `.env` file as `JIRA_BASE_URL` (check `.env.example` file)
 
 ### CSV build config
-*Curious Goran will add "key" and "title" to resulted CSV. So you shouldn't use these fields in the csv-build-convig.json*
+*Curious Goran will add "url" and "title" to resulted CSV. So you shouldn't use these fields in the csv-build-convig.json*
 1. Check `/data/csv-build-config.example.json` file.
 2. Add your own statuses to the csv in the order you would like.
 3. Rename `csv-build-config.example.json` to `csv-build-config.json`

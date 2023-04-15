@@ -1,5 +1,4 @@
 import axios from "axios";
-import { createWriteStream } from "fs";
 
 import { config } from "dotenv";
 config();
@@ -7,7 +6,7 @@ config();
 import { JiraTicket } from "./types";
 
 const AXIOS_INSTANCE = axios.create({
-  baseURL: process.env.JIRA_BASE_URL + "rest/api/2/",
+  baseURL: process.env.JIRA_BASE_URL + "/rest/api/2/",
   timeout: 15000,
   headers: {
     Authorization: `Basic ${process.env.JIRA_TOKEN_BASE_64}`,

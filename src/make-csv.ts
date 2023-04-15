@@ -8,11 +8,11 @@ export const buildCsv = (
 ): Csv => {
   const result: CsvPresentation = [];
   const { interestedStatusesForTimeCalculations, switchesBetweenStatuses } = csvBuildConfig;
-  const accumulatedArrays = ["key", "title", ...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
+  const accumulatedArrays = ["url", "title", ...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
 
   result.push(accumulatedArrays.join(", "));
 
-  tickets.forEach(({ key, title, timeInStatuses, switchesBetweenStatuses }) => {
+  tickets.forEach(({ url, title, timeInStatuses, switchesBetweenStatuses }) => {
     const sum = { ...timeInStatuses, ...switchesBetweenStatuses };
 
     const csvRow: (string | number | null)[] = accumulatedArrays.map((item) => {
@@ -22,7 +22,7 @@ export const buildCsv = (
 
       return config.setZeroInsteadOfNull ? 0 : null;
     });
-    csvRow[0] = key;
+    csvRow[0] = url;
     csvRow[1] = title;
 
     result.push(csvRow.join(", "));
