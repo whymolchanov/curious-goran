@@ -8,6 +8,7 @@ import {
   createSlicedPairsFromArray,
   makeJiraTicketUrl,
   withoutNull,
+  wrapItemWithCommaInBraces,
 } from "../src/utils";
 
 const JIRA_BASE_URL_FOR_TESTING = 'https://super-puper.com';
@@ -262,7 +263,7 @@ test("buildCsv with zeros", () => {
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{
     "url": `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027`,
-    "title": "something for test",
+    "title": "something for test, and more, and more",
     "timeInStatuses": {
       "In progress": 0,
       "In Review": 0,
@@ -283,11 +284,17 @@ test("buildCsv: make a CSV with switches", () => {
     switchesBetweenStatuses: ["To Do -> In progress"]
   };
 
-  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), `url, title, To Do -> In progress\n${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027, something for test, 1`)
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), `url, title, To Do -> In progress\n${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027, "something for test, and more, and more", 1`)
 })
 
 test("makeJiraTicketUrl function", () => {
   assert.equal(makeJiraTicketUrl('https://super-base.jira.com', 'RET-666'), 'https://super-base.jira.com/browse/RET-666')
+})
+
+test("wrapItemWithCommaInBraces", () => {
+  assert.equal(wrapItemWithCommaInBraces(1), 1);
+  assert.equal(wrapItemWithCommaInBraces("foo"), "foo");
+  assert.equal(wrapItemWithCommaInBraces("super, puper"), "\"super, puper\"");
 })
 
 test.run();

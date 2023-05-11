@@ -73,3 +73,25 @@ export const calculateHowMuchTimeWasInEveryStatus = (
 export const makeJiraTicketUrl = (baseUrl: string, jiraTicketKey: JiraTicketKey): JiraTicketUrl => {
   return `${baseUrl}/browse/${jiraTicketKey}`;
 }
+
+/**
+ * examples: 
+ * 1 => 1
+ * abc => abc
+ * super, puper => "super, puper"
+ */
+export const wrapItemWithCommaInBraces = (item: number | string | null) => {
+  if (item === null) {
+    return item;
+  }
+
+  if (typeof item === 'number') {
+    return item;
+  }
+
+  if (item.includes(',')) {
+    return `"${item}"`;
+  }
+
+  return item;
+}
