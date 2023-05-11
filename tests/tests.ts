@@ -7,9 +7,8 @@ import {
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
   makeJiraTicketUrl,
-  removeNewLines,
   withoutNull,
-  wrapItemWithCommaInBraces,
+  wrapStringsInBraces,
 } from "../src/utils";
 
 const JIRA_BASE_URL_FOR_TESTING = 'https://super-puper.com';
@@ -232,7 +231,7 @@ test("buildCsv with empty spaces", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: false }
     ),
-    [["url", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922, something for test, , 0`].join("\n")
+    [["url", "title", ...csvBuildConfig1.interestedStatusesForTimeCalculations].join(", "), `"${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922", "something for test", , 0`].join("\n")
   );
 });
 
@@ -256,7 +255,7 @@ test("buildCsv with zeros", () => {
       csvBuildConfig1,
       { setZeroInsteadOfNull: true }
     ),
-    ["url, title, Waiting for Development, In Testing", `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922, something for test, 0, 0`].join("\n")
+    ["url, title, Waiting for Development, In Testing", `"${JIRA_BASE_URL_FOR_TESTING}/browse/RET-2922", "something for test", 0, 0`].join("\n")
   );
 });
 
@@ -264,7 +263,7 @@ test("buildCsv with zeros", () => {
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{
     "url": `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027`,
-    "title": "something for test, and more, and more\n",
+    "title": "something for test, and more, and more",
     "timeInStatuses": {
       "In progress": 0,
       "In Review": 0,
@@ -285,23 +284,18 @@ test("buildCsv: make a CSV with switches", () => {
     switchesBetweenStatuses: ["To Do -> In progress"]
   };
 
-  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), `url, title, To Do -> In progress\n${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027, "something for test, and more, and more", 1`)
+  assert.equal(buildCsv(tickets, csvBuildConfig, { setZeroInsteadOfNull: true }), `url, title, To Do -> In progress\n"${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027", "something for test, and more, and more", 1`)
 })
 
 test("makeJiraTicketUrl function", () => {
   assert.equal(makeJiraTicketUrl('https://super-base.jira.com', 'RET-666'), 'https://super-base.jira.com/browse/RET-666')
 })
 
-test("wrapItemWithCommaInBraces", () => {
-  assert.equal(wrapItemWithCommaInBraces(1), 1);
-  assert.equal(wrapItemWithCommaInBraces("foo"), "foo");
-  assert.equal(wrapItemWithCommaInBraces("super, puper"), "\"super, puper\"");
-})
-
-test("removeNewLines", () => {
-  assert.equal(removeNewLines(1), 1);
-  assert.equal(removeNewLines("foo"), "foo");
-  assert.equal(removeNewLines("super\npuper"), "superpuper");
+test("wrapStringInBraces", () => {
+  assert.equal(wrapStringsInBraces(1), 1);
+  assert.equal(wrapStringsInBraces(null), null);
+  assert.equal(wrapStringsInBraces("super, puper"), "\"super, puper\"");
+  assert.equal(wrapStringsInBraces("super, puper\n"), "\"super, puper\n\"");
 })
 
 test.run();

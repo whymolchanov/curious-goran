@@ -77,28 +77,12 @@ export const makeJiraTicketUrl = (baseUrl: string, jiraTicketKey: JiraTicketKey)
 /**
  * examples: 
  * 1 => 1
- * abc => abc
- * super, puper => "super, puper"
+ * null => null
+ * abc => "abc"
  */
-export const wrapItemWithCommaInBraces = (item: number | string | null) => {
-  if (item === null) {
-    return item;
-  }
-
-  if (typeof item === 'number') {
-    return item;
-  }
-
-  if (item.includes(',')) {
+export const wrapStringsInBraces = (item: number | string | null) => {
+  if (typeof item === "string") {
     return `"${item}"`;
-  }
-
-  return item;
-}
-
-export const removeNewLines = (item: number | string | null) => {
-  if (typeof item === 'string' && item.includes('\n')) {
-    return item.replace('\n', '');
   }
 
   return item;
