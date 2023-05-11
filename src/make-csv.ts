@@ -1,6 +1,6 @@
 import { Ticket, CsvBuildConfig, Csv, CsvPresentation } from "./types";
 import { Config } from "./config";
-import { wrapItemWithCommaInBraces } from "./utils";
+import { removeNewLines, wrapItemWithCommaInBraces } from "./utils";
 
 export const buildCsv = (
   tickets: Ticket[],
@@ -26,7 +26,7 @@ export const buildCsv = (
     csvRow[0] = url;
     csvRow[1] = title;
 
-    result.push(csvRow.map(wrapItemWithCommaInBraces).join(", "));
+    result.push(csvRow.map(wrapItemWithCommaInBraces).map(removeNewLines).join(", "));
   });
 
   return result.join("\n");

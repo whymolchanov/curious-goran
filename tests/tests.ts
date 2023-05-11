@@ -7,6 +7,7 @@ import {
   calculateHowMuchTimeWasInEveryStatus,
   createSlicedPairsFromArray,
   makeJiraTicketUrl,
+  removeNewLines,
   withoutNull,
   wrapItemWithCommaInBraces,
 } from "../src/utils";
@@ -263,7 +264,7 @@ test("buildCsv with zeros", () => {
 test("buildCsv: make a CSV with switches", () => {
   const tickets = [{
     "url": `${JIRA_BASE_URL_FOR_TESTING}/browse/RET-3027`,
-    "title": "something for test, and more, and more",
+    "title": "something for test, and more, and more\n",
     "timeInStatuses": {
       "In progress": 0,
       "In Review": 0,
@@ -295,6 +296,12 @@ test("wrapItemWithCommaInBraces", () => {
   assert.equal(wrapItemWithCommaInBraces(1), 1);
   assert.equal(wrapItemWithCommaInBraces("foo"), "foo");
   assert.equal(wrapItemWithCommaInBraces("super, puper"), "\"super, puper\"");
+})
+
+test("removeNewLines", () => {
+  assert.equal(removeNewLines(1), 1);
+  assert.equal(removeNewLines("foo"), "foo");
+  assert.equal(removeNewLines("super\npuper"), "superpuper");
 })
 
 test.run();

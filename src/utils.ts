@@ -95,3 +95,11 @@ export const wrapItemWithCommaInBraces = (item: number | string | null) => {
 
   return item;
 }
+
+export const removeNewLines = (item: number | string | null) => {
+  if (typeof item === 'string' && item.includes('\n')) {
+    return item.replace('\n', '');
+  }
+
+  return item;
+}
