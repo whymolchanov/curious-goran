@@ -16,11 +16,19 @@
         "In Review -> Ready for Testing",
         "In Review -> In progress"
       ]
+    },
+    "additionalConfigs": {
+      "timeUnit": "days",
+      "setZeroInsteadOfNull": true
     }
   },
   {
     "fileName": "Super heroes team",
     "jql": "project%3D\"Super%20%26%20Heroes\"",
-    "jiraStatusesForCsv": {}
+    "jiraStatusesForCsv": {},
+    "additionalConfigs": {
+      "timeUnit": "hours",
+      "setZeroInsteadOfNull": false
+    }
   }
 ]

@@ -1,9 +1,9 @@
 import { DateTime, Duration } from "luxon";
-import { Config } from "./config";
 import {
   JiraTicketKey,
   JiraTicketUrl,
   TimeInStatus,
+  TimeUnit,
   Transition,
 } from "./types";
 
@@ -35,7 +35,7 @@ export const withoutNull = <T>(array: Array<T | null>): T[] => {
 };
 
 export const calculateHowMuchTimeWasInEveryStatus = (
-  config: Pick<Config, "timeUnit">,
+  timeUnit: TimeUnit,
   source: Transition
 ): TimeInStatus => {
   const { transitions } = source;
@@ -51,9 +51,9 @@ export const calculateHowMuchTimeWasInEveryStatus = (
     const [first, second] = pair;
     const firstDate = DateTime.fromISO(first.when);
     const secondDate = DateTime.fromISO(second.when);
-    const delta: Duration = secondDate.diff(firstDate, [config.timeUnit]);
+    const delta: Duration = secondDate.diff(firstDate, [timeUnit]);
 
-    return { [second.fromStatus]: Math.round(delta.get(config.timeUnit)) };
+    return { [second.fromStatus]: Math.round(delta.get(timeUnit)) };
   });
 
   return arrayOfDurations.reduce((acc, item) => {
@@ -70,12 +70,15 @@ export const calculateHowMuchTimeWasInEveryStatus = (
   }, {});
 };
 
-export const makeJiraTicketUrl = (baseUrl: string, jiraTicketKey: JiraTicketKey): JiraTicketUrl => {
+export const makeJiraTicketUrl = (
+  baseUrl: string,
+  jiraTicketKey: JiraTicketKey
+): JiraTicketUrl => {
   return `${baseUrl}/browse/${jiraTicketKey}`;
-}
+};
 
 /**
- * examples: 
+ * examples:
  * 1 => 1
  * null => null
  * abc => "abc"
@@ -86,4 +89,4 @@ export const wrapStringsInBraces = (item: number | string | null) => {
   }
 
   return item;
-}
+};

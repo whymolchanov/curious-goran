@@ -64,14 +64,30 @@ export type CsvBuildConfig = {
   switchesBetweenStatuses: StatusSwitchString[];
 };
 
+export type TimeUnit = "days" | "hours";
+
+export interface AdditionalConfig {
+  timeUnit: TimeUnit;
+  /**
+   * If there is no value for particular status,
+   * Curious Goran will write them as 0.
+   * If you need empty spaces in place of obsolence
+   * of particular statuses set here false.
+   * */
+  setZeroInsteadOfNull: boolean;
+}
+
+// TODO: think about this one
 export type JqlConfig = {
   fileName: string;
   jql: string;
   jiraStatusesForCsv: CsvBuildConfig;
+  additionalConfigs: AdditionalConfig;
 }[];
 
 export type Work = {
   fileName: string;
   url: string;
   jiraStatusesForCsv: CsvBuildConfig;
+  additionalConfigs: AdditionalConfig;
 };
