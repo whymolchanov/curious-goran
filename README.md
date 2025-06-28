@@ -19,12 +19,13 @@ Add base URL to `.env` file as `JIRA_BASE_URL` (check `.env.example` file)
 
 ### Configure
 
-Add your JQLs and statuses you want to see in resulting CSV to the `/data/jql.json` file (check the example in the `/data/jql.example.json` file)
+1. Make copy of /src/config.example.json to /src/config.json
+2. Rewrite the config.json file. Add your JQLs and statuses you want to see in resulting CSV
 
-_Curious Goran will add "url" and "title" to resulted CSV. So you shouldn't use these fields in the /data/jql.json_
+_Curious Goran will add "url" and "title" to resulted CSV. So you shouldn't use these fields in the /src/config.json_
 
 ## Request data
 
 Run `npm start`
 
-_Curious Goran will create a separate CSV file for each entry in the `/data/jql.json` file._
+_Curious Goran will create a separate CSV file for each entry in the `/src/config.json` file._

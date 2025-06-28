@@ -1,7 +1,7 @@
 node_modules
 .env
 data/**
-!data/jql.example.json
+src/config.json
 .vscode
 .DS_Store
 coverage

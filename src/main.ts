@@ -4,7 +4,7 @@ import { createTickets } from "./convert";
 import { get } from "./get";
 import { buildCsv } from "./make-csv";
 import { CsvPresentation, JiraTicket, JqlConfig, Work } from "./types";
-const jqls = require("../data/jql.json") as JqlConfig;
+const jqls = require("../src/config.json") as JqlConfig;
 
 const searchForWork = (jqlConfig: JqlConfig): Work[] => {
   return jqlConfig.map(
