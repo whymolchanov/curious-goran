@@ -77,17 +77,13 @@ export interface AdditionalConfig {
   setZeroInsteadOfNull: boolean;
 }
 
-// TODO: think about this one
 export type JqlConfig = {
   fileName: string;
   jql: string;
   jiraStatusesForCsv: CsvBuildConfig;
   additionalConfigs: AdditionalConfig;
-}[];
+};
 
-export type Work = {
-  fileName: string;
+export type Work = JqlConfig & {
   url: string;
-  jiraStatusesForCsv: CsvBuildConfig;
-  additionalConfigs: AdditionalConfig;
 };
