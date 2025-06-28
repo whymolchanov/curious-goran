@@ -64,4 +64,6 @@ export interface JiraTicket {
   };
 }
 
+export type JqlConfig = {fileName: string, url: string,}[]
+
 export type Work = { fileName: string; url: string }[]
