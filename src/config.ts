@@ -10,6 +10,6 @@ export interface Config {
 }
 
 export const config: Config = {
-  timeUnit: "hours",
+  timeUnit: "days",
   setZeroInsteadOfNull: true,
 };

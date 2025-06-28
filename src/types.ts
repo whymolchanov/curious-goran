@@ -16,11 +16,6 @@ export type JiraTicketTitle = string;
 // example: "In review -> In progress"
 export type StatusSwitchString = string;
 
-export interface CsvBuildConfig {
-  interestedStatusesForTimeCalculations: JiraTicketStatus[];
-  switchesBetweenStatuses: StatusSwitchString[]
-};
-
 export type Count = number;
 export type StatusSwitches = Record<StatusSwitchString, Count>;
 
@@ -58,12 +53,25 @@ export interface JiraTicket {
   key: JiraTicketKey;
   fields: {
     summary: JiraTicketTitle;
-  },
+  };
   changelog: {
     histories: JiraTicketHistory[];
   };
 }
 
-export type JqlConfig = {fileName: string, url: string,}[]
+export type CsvBuildConfig = {
+  interestedStatusesForTimeCalculations: JiraTicketStatus[];
+  switchesBetweenStatuses: StatusSwitchString[];
+};
 
-export type Work = { fileName: string; url: string }[]
+export type JqlConfig = {
+  fileName: string;
+  jql: string;
+  jiraStatusesForCsv: CsvBuildConfig;
+}[];
+
+export type Work = {
+  fileName: string;
+  url: string;
+  jiraStatusesForCsv: CsvBuildConfig;
+};

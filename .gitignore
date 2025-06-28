@@ -1,7 +1,6 @@
 node_modules
 .env
 data/**
-!data/csv-build-config.example.json
 !data/jql.example.json
 .vscode
 .DS_Store
