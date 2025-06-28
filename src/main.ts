@@ -1,25 +1,16 @@
 import { createWriteStream } from "fs";
 import { exit } from "process";
-import { config } from "./config";
 import { createTickets } from "./convert";
 import { get } from "./get";
 import { buildCsv } from "./make-csv";
-import {
-  CsvBuildConfig,
-  CsvPresentation,
-  JiraTicket,
-  JqlConfig,
-  Work,
-} from "./types";
-const jqls = require("../data/jql.json");
+import { CsvPresentation, JiraTicket, JqlConfig, Work } from "./types";
+const jqls = require("../src/config.json") as JqlConfig[];
 
-const searchForWork = (jqlConfig: JqlConfig): Work => {
-  return jqlConfig.map(({ fileName, url }) => {
-    return {
-      fileName,
-      url: `/search?expand=changelog&jql=${url}`,
-    };
-  });
+const searchForWork = (jqlConfig: JqlConfig[]): Work[] => {
+  return jqlConfig.map((config) => ({
+    ...config,
+    url: `/search?expand=changelog&jql=${config.jql}`,
+  }));
 };
 
 const run = async () => {
@@ -31,17 +22,22 @@ const run = async () => {
   });
   const csvPresentations: CsvPresentation = [];
 
-  for (const { fileName, url } of workList) {
+  for (const {
+    fileName,
+    url,
+    jiraStatusesForCsv,
+    additionalConfigs,
+  } of workList) {
     console.log(
       `Start working regarding ${fileName}.csv\nUsing this path ${url}`
     );
     const jiraTickets: JiraTicket[] = await get(url);
-    const tickets = createTickets(jiraTickets);
+    const tickets = createTickets(jiraTickets, additionalConfigs.timeUnit);
 
     console.log("Start converting Jira issues to CSV...");
-    const csvTemplate =
-      require("../data/csv-build-config.json") as CsvBuildConfig;
-    csvPresentations.push(buildCsv(tickets, csvTemplate, config));
+    csvPresentations.push(
+      buildCsv(tickets, jiraStatusesForCsv, additionalConfigs)
+    );
   }
 
   console.log("Writing to files...");

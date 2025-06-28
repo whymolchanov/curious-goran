@@ -1,0 +1,34 @@
+[
+  {
+    "fileName": "Bob Torn",
+    "jql": "assignee%20%3D5f7d8db66666666006f407c60",
+    "jiraStatusesForCsv": {
+      "interestedStatusesForTimeCalculations": [
+        "Waiting for Development",
+        "In progress",
+        "In Review",
+        "Ready for Testing",
+        "In Testing",
+        "Ready to release"
+      ],
+      "switchesBetweenStatuses": [
+        "In Testing -> Ready to release",
+        "In Review -> Ready for Testing",
+        "In Review -> In progress"
+      ]
+    },
+    "additionalConfigs": {
+      "timeUnit": "days",
+      "setZeroInsteadOfNull": true
+    }
+  },
+  {
+    "fileName": "Super heroes team",
+    "jql": "project%3D\"Super%20%26%20Heroes\"",
+    "jiraStatusesForCsv": {},
+    "additionalConfigs": {
+      "timeUnit": "hours",
+      "setZeroInsteadOfNull": false
+    }
+  }
+]

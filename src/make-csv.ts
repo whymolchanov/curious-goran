@@ -1,15 +1,26 @@
-import { Ticket, CsvBuildConfig, Csv, CsvPresentation } from "./types";
-import { Config } from "./config";
+import {
+  Ticket,
+  Csv,
+  CsvPresentation,
+  CsvBuildConfig,
+  AdditionalConfig,
+} from "./types";
 import { wrapStringsInBraces } from "./utils";
 
 export const buildCsv = (
   tickets: Ticket[],
   csvBuildConfig: CsvBuildConfig,
-  config: Pick<Config, "setZeroInsteadOfNull">
+  config: Pick<AdditionalConfig, "setZeroInsteadOfNull">
 ): Csv => {
   const result: CsvPresentation = [];
-  const { interestedStatusesForTimeCalculations, switchesBetweenStatuses } = csvBuildConfig;
-  const accumulatedArrays = ["url", "title", ...interestedStatusesForTimeCalculations, ...switchesBetweenStatuses];
+  const { interestedStatusesForTimeCalculations, switchesBetweenStatuses } =
+    csvBuildConfig;
+  const accumulatedArrays = [
+    "url",
+    "title",
+    ...interestedStatusesForTimeCalculations,
+    ...switchesBetweenStatuses,
+  ];
 
   result.push(accumulatedArrays.join(", "));
 
@@ -31,4 +42,3 @@ export const buildCsv = (
 
   return result.join("\n");
 };
-
